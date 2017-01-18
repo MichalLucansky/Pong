@@ -7,27 +7,97 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3752859F1E069B70004AE801 /* BlockBreakerGameOver.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3752859E1E069B70004AE801 /* BlockBreakerGameOver.sks */; };
+		375285A11E069B83004AE801 /* BlockBreakerGameOverClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375285A01E069B83004AE801 /* BlockBreakerGameOverClass.swift */; };
+		375285A31E06A363004AE801 /* NextLvlClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375285A21E06A363004AE801 /* NextLvlClass.swift */; };
+		375285A51E06A3EF004AE801 /* NextLvlScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 375285A41E06A3EF004AE801 /* NextLvlScene.sks */; };
+		375285A81E06F1B1004AE801 /* SpaceInvadersScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 375285A71E06F1B1004AE801 /* SpaceInvadersScene.sks */; };
+		375285AA1E06F1C1004AE801 /* SpaceInvadersClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375285A91E06F1C1004AE801 /* SpaceInvadersClass.swift */; };
+		37615AFF1E2D17B4006B7485 /* explosion.wav in Resources */ = {isa = PBXBuildFile; fileRef = 37615AFE1E2D17B4006B7485 /* explosion.wav */; };
+		37615B011E2D1801006B7485 /* shoot.wav in Resources */ = {isa = PBXBuildFile; fileRef = 37615B001E2D1801006B7485 /* shoot.wav */; };
+		37615B031E2D189D006B7485 /* invaderkilled.wav in Resources */ = {isa = PBXBuildFile; fileRef = 37615B021E2D189D006B7485 /* invaderkilled.wav */; };
+		37615B051E2D21F2006B7485 /* 10 Arpanauts.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 37615B041E2D21F2006B7485 /* 10 Arpanauts.mp3 */; };
+		37615B071E2D2584006B7485 /* 01 A Night Of Dizzy Spells.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 37615B061E2D2584006B7485 /* 01 A Night Of Dizzy Spells.mp3 */; };
+		37615B091E2D2671006B7485 /* 03 Chibi Ninja.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 37615B081E2D2671006B7485 /* 03 Chibi Ninja.mp3 */; };
+		37615B0B1E2D29F6006B7485 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 37615B0A1E2D29F6006B7485 /* GameScene.sks */; };
+		37615B0D1E2D2A03006B7485 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37615B0C1E2D2A03006B7485 /* GameScene.swift */; };
+		37615B0F1E2D2AC3006B7485 /* GameOverSnake.sks in Resources */ = {isa = PBXBuildFile; fileRef = 37615B0E1E2D2AC3006B7485 /* GameOverSnake.sks */; };
+		37615B111E2D2ACD006B7485 /* GameOverClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37615B101E2D2ACD006B7485 /* GameOverClass.swift */; };
 		37AE57321E03257000C402D6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AE57311E03257000C402D6 /* AppDelegate.swift */; };
-		37AE57341E03257000C402D6 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 37AE57331E03257000C402D6 /* GameScene.sks */; };
-		37AE57361E03257000C402D6 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 37AE57351E03257000C402D6 /* Actions.sks */; };
-		37AE57381E03257000C402D6 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AE57371E03257000C402D6 /* GameScene.swift */; };
+		37AE57341E03257000C402D6 /* PongScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 37AE57331E03257000C402D6 /* PongScene.sks */; };
+		37AE57381E03257000C402D6 /* Pong.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AE57371E03257000C402D6 /* Pong.swift */; };
 		37AE573A1E03257000C402D6 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AE57391E03257000C402D6 /* GameViewController.swift */; };
 		37AE573D1E03257000C402D6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37AE573B1E03257000C402D6 /* Main.storyboard */; };
 		37AE573F1E03257000C402D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37AE573E1E03257000C402D6 /* Assets.xcassets */; };
 		37AE57421E03257000C402D6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37AE57401E03257000C402D6 /* LaunchScreen.storyboard */; };
+		37AE574D1E03263800C402D6 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AE574C1E03263800C402D6 /* Player.swift */; };
+		37AE57511E0338C600C402D6 /* LCDPHONE.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 37AE57501E0338C600C402D6 /* LCDPHONE.TTF */; };
+		37AE57541E033BFE00C402D6 /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AE57531E033BFE00C402D6 /* Enemy.swift */; };
+		37AE57571E03E49800C402D6 /* Ball.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AE57561E03E49800C402D6 /* Ball.swift */; };
+		37B2E2311E0537DF008D095A /* WinningScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B2E2301E0537DF008D095A /* WinningScene.swift */; };
+		37B2E2331E05381C008D095A /* WinningScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 37B2E2321E05381C008D095A /* WinningScene.sks */; };
+		37B2E2361E055D1F008D095A /* MainMenu.sks in Resources */ = {isa = PBXBuildFile; fileRef = 37B2E2351E055D1F008D095A /* MainMenu.sks */; };
+		37B2E2381E055D2C008D095A /* MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B2E2371E055D2C008D095A /* MainMenu.swift */; };
+		37B2E2411E05C8EC008D095A /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B2E2401E05C8EC008D095A /* Utilities.swift */; };
+		37BEC1E21E104953009F5E5C /* GameOverSpaceInvaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BEC1E11E104953009F5E5C /* GameOverSpaceInvaders.swift */; };
+		37BEC1E41E1049F2009F5E5C /* GameOverSpaceInvaders.sks in Resources */ = {isa = PBXBuildFile; fileRef = 37BEC1E31E1049F2009F5E5C /* GameOverSpaceInvaders.sks */; };
+		37BEC1E91E105917009F5E5C /* VictoryScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 37BEC1E81E105917009F5E5C /* VictoryScene.sks */; };
+		37BEC1EB1E105929009F5E5C /* VictoryClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BEC1EA1E105929009F5E5C /* VictoryClass.swift */; };
+		37CD33B81E2E71E50093991B /* 02 HHavok-main.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 37CD33B71E2E71E50093991B /* 02 HHavok-main.mp3 */; };
+		37CD33BA1E2E76AC0093991B /* EndGameLost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CD33B91E2E76AC0093991B /* EndGameLost.swift */; };
+		37CD33BC1E2E76E40093991B /* EndGameLost.sks in Resources */ = {isa = PBXBuildFile; fileRef = 37CD33BB1E2E76E40093991B /* EndGameLost.sks */; };
+		37D348171E067DBD00A4FE51 /* BlockBreakerClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D348161E067DBD00A4FE51 /* BlockBreakerClass.swift */; };
+		37D348191E067DEB00A4FE51 /* BlockBreakerScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 37D348181E067DEB00A4FE51 /* BlockBreakerScene.sks */; };
+		37EAD16E1E2F5DFC00EB1A53 /* PongMultiSingleSel.sks in Resources */ = {isa = PBXBuildFile; fileRef = 37EAD16D1E2F5DFC00EB1A53 /* PongMultiSingleSel.sks */; };
+		37EAD1701E2F5E0B00EB1A53 /* PongMultiSingleSel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EAD16F1E2F5E0B00EB1A53 /* PongMultiSingleSel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3752859E1E069B70004AE801 /* BlockBreakerGameOver.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BlockBreakerGameOver.sks; sourceTree = "<group>"; };
+		375285A01E069B83004AE801 /* BlockBreakerGameOverClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockBreakerGameOverClass.swift; sourceTree = "<group>"; };
+		375285A21E06A363004AE801 /* NextLvlClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NextLvlClass.swift; sourceTree = "<group>"; };
+		375285A41E06A3EF004AE801 /* NextLvlScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = NextLvlScene.sks; sourceTree = "<group>"; };
+		375285A71E06F1B1004AE801 /* SpaceInvadersScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SpaceInvadersScene.sks; sourceTree = "<group>"; };
+		375285A91E06F1C1004AE801 /* SpaceInvadersClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpaceInvadersClass.swift; sourceTree = "<group>"; };
+		37615AFE1E2D17B4006B7485 /* explosion.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = explosion.wav; sourceTree = "<group>"; };
+		37615B001E2D1801006B7485 /* shoot.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = shoot.wav; sourceTree = "<group>"; };
+		37615B021E2D189D006B7485 /* invaderkilled.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = invaderkilled.wav; sourceTree = "<group>"; };
+		37615B041E2D21F2006B7485 /* 10 Arpanauts.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "10 Arpanauts.mp3"; sourceTree = "<group>"; };
+		37615B061E2D2584006B7485 /* 01 A Night Of Dizzy Spells.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "01 A Night Of Dizzy Spells.mp3"; sourceTree = "<group>"; };
+		37615B081E2D2671006B7485 /* 03 Chibi Ninja.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "03 Chibi Ninja.mp3"; sourceTree = "<group>"; };
+		37615B0A1E2D29F6006B7485 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		37615B0C1E2D2A03006B7485 /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		37615B0E1E2D2AC3006B7485 /* GameOverSnake.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameOverSnake.sks; sourceTree = "<group>"; };
+		37615B101E2D2ACD006B7485 /* GameOverClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverClass.swift; sourceTree = "<group>"; };
 		37AE572E1E03257000C402D6 /* Pong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pong.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37AE57311E03257000C402D6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		37AE57331E03257000C402D6 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
-		37AE57351E03257000C402D6 /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
-		37AE57371E03257000C402D6 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		37AE57331E03257000C402D6 /* PongScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PongScene.sks; sourceTree = "<group>"; };
+		37AE57371E03257000C402D6 /* Pong.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pong.swift; sourceTree = "<group>"; };
 		37AE57391E03257000C402D6 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		37AE573C1E03257000C402D6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		37AE573E1E03257000C402D6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		37AE57411E03257000C402D6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		37AE57431E03257000C402D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		37AE574C1E03263800C402D6 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		37AE57501E0338C600C402D6 /* LCDPHONE.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = LCDPHONE.TTF; sourceTree = "<group>"; };
+		37AE57531E033BFE00C402D6 /* Enemy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
+		37AE57561E03E49800C402D6 /* Ball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ball.swift; sourceTree = "<group>"; };
+		37B2E2301E0537DF008D095A /* WinningScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WinningScene.swift; sourceTree = "<group>"; };
+		37B2E2321E05381C008D095A /* WinningScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = WinningScene.sks; sourceTree = "<group>"; };
+		37B2E2351E055D1F008D095A /* MainMenu.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MainMenu.sks; sourceTree = "<group>"; };
+		37B2E2371E055D2C008D095A /* MainMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenu.swift; sourceTree = "<group>"; };
+		37B2E2401E05C8EC008D095A /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		37BEC1E11E104953009F5E5C /* GameOverSpaceInvaders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverSpaceInvaders.swift; sourceTree = "<group>"; };
+		37BEC1E31E1049F2009F5E5C /* GameOverSpaceInvaders.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameOverSpaceInvaders.sks; sourceTree = "<group>"; };
+		37BEC1E81E105917009F5E5C /* VictoryScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = VictoryScene.sks; sourceTree = "<group>"; };
+		37BEC1EA1E105929009F5E5C /* VictoryClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VictoryClass.swift; sourceTree = "<group>"; };
+		37CD33B71E2E71E50093991B /* 02 HHavok-main.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "02 HHavok-main.mp3"; sourceTree = "<group>"; };
+		37CD33B91E2E76AC0093991B /* EndGameLost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndGameLost.swift; sourceTree = "<group>"; };
+		37CD33BB1E2E76E40093991B /* EndGameLost.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = EndGameLost.sks; sourceTree = "<group>"; };
+		37D348161E067DBD00A4FE51 /* BlockBreakerClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockBreakerClass.swift; sourceTree = "<group>"; };
+		37D348181E067DEB00A4FE51 /* BlockBreakerScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BlockBreakerScene.sks; sourceTree = "<group>"; };
+		37EAD16D1E2F5DFC00EB1A53 /* PongMultiSingleSel.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PongMultiSingleSel.sks; sourceTree = "<group>"; };
+		37EAD16F1E2F5E0B00EB1A53 /* PongMultiSingleSel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PongMultiSingleSel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +111,52 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3752859A1E0699F4004AE801 /* PONG */ = {
+			isa = PBXGroup;
+			children = (
+				37EAD16C1E2F5DDC00EB1A53 /* PongSIngleMultMenu */,
+				37B2E22E1E05379B008D095A /* GameOver PONG */,
+				37B2E22F1E0537BA008D095A /* Winning scene PONG */,
+			);
+			name = PONG;
+			sourceTree = "<group>";
+		};
+		3752859B1E069A3F004AE801 /* BLOCKBREAKER */ = {
+			isa = PBXGroup;
+			children = (
+				3752859D1E069A63004AE801 /* NextLvlScene */,
+				3752859C1E069A53004AE801 /* GameOverScene */,
+			);
+			name = BLOCKBREAKER;
+			sourceTree = "<group>";
+		};
+		3752859C1E069A53004AE801 /* GameOverScene */ = {
+			isa = PBXGroup;
+			children = (
+				3752859E1E069B70004AE801 /* BlockBreakerGameOver.sks */,
+				375285A01E069B83004AE801 /* BlockBreakerGameOverClass.swift */,
+			);
+			name = GameOverScene;
+			sourceTree = "<group>";
+		};
+		3752859D1E069A63004AE801 /* NextLvlScene */ = {
+			isa = PBXGroup;
+			children = (
+				375285A21E06A363004AE801 /* NextLvlClass.swift */,
+				375285A41E06A3EF004AE801 /* NextLvlScene.sks */,
+			);
+			name = NextLvlScene;
+			sourceTree = "<group>";
+		};
+		375285A61E06F18A004AE801 /* SpaceInvaders */ = {
+			isa = PBXGroup;
+			children = (
+				37BEC1E51E1057E2009F5E5C /* Scene&Class */,
+				37BEC1E01E10491E009F5E5C /* SpaceInvadersEndScenes */,
+			);
+			name = SpaceInvaders;
+			sourceTree = "<group>";
+		};
 		37AE57251E03257000C402D6 = {
 			isa = PBXGroup;
 			children = (
@@ -60,17 +176,198 @@
 		37AE57301E03257000C402D6 /* Pong */ = {
 			isa = PBXGroup;
 			children = (
+				37B2E23F1E05C8DE008D095A /* Utilities */,
+				37B2E2341E055D06008D095A /* main menu */,
+				37AE574F1E0338A800C402D6 /* Font */,
+				37AE57491E0325C800C402D6 /* Classes */,
 				37AE57311E03257000C402D6 /* AppDelegate.swift */,
-				37AE57331E03257000C402D6 /* GameScene.sks */,
-				37AE57351E03257000C402D6 /* Actions.sks */,
-				37AE57371E03257000C402D6 /* GameScene.swift */,
 				37AE57391E03257000C402D6 /* GameViewController.swift */,
 				37AE573B1E03257000C402D6 /* Main.storyboard */,
 				37AE573E1E03257000C402D6 /* Assets.xcassets */,
+				37CD33B71E2E71E50093991B /* 02 HHavok-main.mp3 */,
+				37615B081E2D2671006B7485 /* 03 Chibi Ninja.mp3 */,
+				37615B061E2D2584006B7485 /* 01 A Night Of Dizzy Spells.mp3 */,
+				37615B041E2D21F2006B7485 /* 10 Arpanauts.mp3 */,
+				37615B021E2D189D006B7485 /* invaderkilled.wav */,
+				37615B001E2D1801006B7485 /* shoot.wav */,
+				37615AFE1E2D17B4006B7485 /* explosion.wav */,
 				37AE57401E03257000C402D6 /* LaunchScreen.storyboard */,
 				37AE57431E03257000C402D6 /* Info.plist */,
 			);
 			path = Pong;
+			sourceTree = "<group>";
+		};
+		37AE57491E0325C800C402D6 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				37BEC1EC1E105B8D009F5E5C /* Snake */,
+				375285A61E06F18A004AE801 /* SpaceInvaders */,
+				37D348151E067D9200A4FE51 /* BlockBreakerScene&Class */,
+				37AE57551E03E47900C402D6 /* BallClass */,
+				37AE574B1E03261A00C402D6 /* PlayerClass */,
+				37AE57521E033BE600C402D6 /* ClassEnemy */,
+				37AE574E1E03376500C402D6 /* PongSceneClass */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		37AE574A1E0325DD00C402D6 /* EndGameScenes */ = {
+			isa = PBXGroup;
+			children = (
+				3752859B1E069A3F004AE801 /* BLOCKBREAKER */,
+			);
+			name = EndGameScenes;
+			sourceTree = "<group>";
+		};
+		37AE574B1E03261A00C402D6 /* PlayerClass */ = {
+			isa = PBXGroup;
+			children = (
+				37AE574C1E03263800C402D6 /* Player.swift */,
+			);
+			name = PlayerClass;
+			sourceTree = "<group>";
+		};
+		37AE574E1E03376500C402D6 /* PongSceneClass */ = {
+			isa = PBXGroup;
+			children = (
+				3752859A1E0699F4004AE801 /* PONG */,
+				37AE57371E03257000C402D6 /* Pong.swift */,
+				37AE57331E03257000C402D6 /* PongScene.sks */,
+			);
+			name = PongSceneClass;
+			sourceTree = "<group>";
+		};
+		37AE574F1E0338A800C402D6 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				37AE57501E0338C600C402D6 /* LCDPHONE.TTF */,
+			);
+			name = Font;
+			sourceTree = "<group>";
+		};
+		37AE57521E033BE600C402D6 /* ClassEnemy */ = {
+			isa = PBXGroup;
+			children = (
+				37AE57531E033BFE00C402D6 /* Enemy.swift */,
+			);
+			name = ClassEnemy;
+			sourceTree = "<group>";
+		};
+		37AE57551E03E47900C402D6 /* BallClass */ = {
+			isa = PBXGroup;
+			children = (
+				37AE57561E03E49800C402D6 /* Ball.swift */,
+			);
+			name = BallClass;
+			sourceTree = "<group>";
+		};
+		37B2E22E1E05379B008D095A /* GameOver PONG */ = {
+			isa = PBXGroup;
+			children = (
+				37CD33B91E2E76AC0093991B /* EndGameLost.swift */,
+				37CD33BB1E2E76E40093991B /* EndGameLost.sks */,
+			);
+			name = "GameOver PONG";
+			sourceTree = "<group>";
+		};
+		37B2E22F1E0537BA008D095A /* Winning scene PONG */ = {
+			isa = PBXGroup;
+			children = (
+				37B2E2301E0537DF008D095A /* WinningScene.swift */,
+				37B2E2321E05381C008D095A /* WinningScene.sks */,
+			);
+			name = "Winning scene PONG";
+			sourceTree = "<group>";
+		};
+		37B2E2341E055D06008D095A /* main menu */ = {
+			isa = PBXGroup;
+			children = (
+				37B2E2371E055D2C008D095A /* MainMenu.swift */,
+				37B2E2351E055D1F008D095A /* MainMenu.sks */,
+			);
+			name = "main menu";
+			sourceTree = "<group>";
+		};
+		37B2E23F1E05C8DE008D095A /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				37B2E2401E05C8EC008D095A /* Utilities.swift */,
+			);
+			name = Utilities;
+			sourceTree = "<group>";
+		};
+		37BEC1E01E10491E009F5E5C /* SpaceInvadersEndScenes */ = {
+			isa = PBXGroup;
+			children = (
+				37BEC1E71E1058FD009F5E5C /* Win */,
+				37BEC1E61E1058E1009F5E5C /* GameOver */,
+			);
+			name = SpaceInvadersEndScenes;
+			sourceTree = "<group>";
+		};
+		37BEC1E51E1057E2009F5E5C /* Scene&Class */ = {
+			isa = PBXGroup;
+			children = (
+				375285A91E06F1C1004AE801 /* SpaceInvadersClass.swift */,
+				375285A71E06F1B1004AE801 /* SpaceInvadersScene.sks */,
+			);
+			name = "Scene&Class";
+			sourceTree = "<group>";
+		};
+		37BEC1E61E1058E1009F5E5C /* GameOver */ = {
+			isa = PBXGroup;
+			children = (
+				37BEC1E31E1049F2009F5E5C /* GameOverSpaceInvaders.sks */,
+				37BEC1E11E104953009F5E5C /* GameOverSpaceInvaders.swift */,
+			);
+			name = GameOver;
+			sourceTree = "<group>";
+		};
+		37BEC1E71E1058FD009F5E5C /* Win */ = {
+			isa = PBXGroup;
+			children = (
+				37BEC1E81E105917009F5E5C /* VictoryScene.sks */,
+				37BEC1EA1E105929009F5E5C /* VictoryClass.swift */,
+			);
+			name = Win;
+			sourceTree = "<group>";
+		};
+		37BEC1EC1E105B8D009F5E5C /* Snake */ = {
+			isa = PBXGroup;
+			children = (
+				37BEC1ED1E105BA1009F5E5C /* Class&Scene */,
+			);
+			name = Snake;
+			sourceTree = "<group>";
+		};
+		37BEC1ED1E105BA1009F5E5C /* Class&Scene */ = {
+			isa = PBXGroup;
+			children = (
+				37615B0A1E2D29F6006B7485 /* GameScene.sks */,
+				37615B0E1E2D2AC3006B7485 /* GameOverSnake.sks */,
+				37615B0C1E2D2A03006B7485 /* GameScene.swift */,
+				37615B101E2D2ACD006B7485 /* GameOverClass.swift */,
+			);
+			name = "Class&Scene";
+			sourceTree = "<group>";
+		};
+		37D348151E067D9200A4FE51 /* BlockBreakerScene&Class */ = {
+			isa = PBXGroup;
+			children = (
+				37AE574A1E0325DD00C402D6 /* EndGameScenes */,
+				37D348161E067DBD00A4FE51 /* BlockBreakerClass.swift */,
+				37D348181E067DEB00A4FE51 /* BlockBreakerScene.sks */,
+			);
+			name = "BlockBreakerScene&Class";
+			sourceTree = "<group>";
+		};
+		37EAD16C1E2F5DDC00EB1A53 /* PongSIngleMultMenu */ = {
+			isa = PBXGroup;
+			children = (
+				37EAD16D1E2F5DFC00EB1A53 /* PongMultiSingleSel.sks */,
+				37EAD16F1E2F5E0B00EB1A53 /* PongMultiSingleSel.swift */,
+			);
+			name = PongSIngleMultMenu;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -100,7 +397,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0810;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Michal Lučanský";
 				TargetAttributes = {
 					37AE572D1E03257000C402D6 = {
@@ -133,11 +430,30 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37615B051E2D21F2006B7485 /* 10 Arpanauts.mp3 in Resources */,
+				37615B031E2D189D006B7485 /* invaderkilled.wav in Resources */,
+				37EAD16E1E2F5DFC00EB1A53 /* PongMultiSingleSel.sks in Resources */,
+				37615B091E2D2671006B7485 /* 03 Chibi Ninja.mp3 in Resources */,
 				37AE573D1E03257000C402D6 /* Main.storyboard in Resources */,
-				37AE57341E03257000C402D6 /* GameScene.sks in Resources */,
+				37615B0B1E2D29F6006B7485 /* GameScene.sks in Resources */,
+				37CD33B81E2E71E50093991B /* 02 HHavok-main.mp3 in Resources */,
+				37AE57341E03257000C402D6 /* PongScene.sks in Resources */,
 				37AE573F1E03257000C402D6 /* Assets.xcassets in Resources */,
+				37BEC1E91E105917009F5E5C /* VictoryScene.sks in Resources */,
+				37615B011E2D1801006B7485 /* shoot.wav in Resources */,
+				37D348191E067DEB00A4FE51 /* BlockBreakerScene.sks in Resources */,
+				37AE57511E0338C600C402D6 /* LCDPHONE.TTF in Resources */,
+				37B2E2361E055D1F008D095A /* MainMenu.sks in Resources */,
+				375285A81E06F1B1004AE801 /* SpaceInvadersScene.sks in Resources */,
+				37615AFF1E2D17B4006B7485 /* explosion.wav in Resources */,
+				37615B071E2D2584006B7485 /* 01 A Night Of Dizzy Spells.mp3 in Resources */,
+				37CD33BC1E2E76E40093991B /* EndGameLost.sks in Resources */,
+				375285A51E06A3EF004AE801 /* NextLvlScene.sks in Resources */,
+				37B2E2331E05381C008D095A /* WinningScene.sks in Resources */,
+				37615B0F1E2D2AC3006B7485 /* GameOverSnake.sks in Resources */,
+				37BEC1E41E1049F2009F5E5C /* GameOverSpaceInvaders.sks in Resources */,
+				3752859F1E069B70004AE801 /* BlockBreakerGameOver.sks in Resources */,
 				37AE57421E03257000C402D6 /* LaunchScreen.storyboard in Resources */,
-				37AE57361E03257000C402D6 /* Actions.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,8 +464,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				37AE57381E03257000C402D6 /* GameScene.swift in Sources */,
+				37AE57571E03E49800C402D6 /* Ball.swift in Sources */,
+				375285AA1E06F1C1004AE801 /* SpaceInvadersClass.swift in Sources */,
+				37EAD1701E2F5E0B00EB1A53 /* PongMultiSingleSel.swift in Sources */,
+				37615B111E2D2ACD006B7485 /* GameOverClass.swift in Sources */,
+				37B2E2381E055D2C008D095A /* MainMenu.swift in Sources */,
+				37BEC1EB1E105929009F5E5C /* VictoryClass.swift in Sources */,
+				37AE57541E033BFE00C402D6 /* Enemy.swift in Sources */,
+				37AE574D1E03263800C402D6 /* Player.swift in Sources */,
+				37D348171E067DBD00A4FE51 /* BlockBreakerClass.swift in Sources */,
+				37AE57381E03257000C402D6 /* Pong.swift in Sources */,
+				37B2E2311E0537DF008D095A /* WinningScene.swift in Sources */,
+				37BEC1E21E104953009F5E5C /* GameOverSpaceInvaders.swift in Sources */,
+				37615B0D1E2D2A03006B7485 /* GameScene.swift in Sources */,
+				37CD33BA1E2E76AC0093991B /* EndGameLost.swift in Sources */,
 				37AE573A1E03257000C402D6 /* GameViewController.swift in Sources */,
+				375285A11E069B83004AE801 /* BlockBreakerGameOverClass.swift in Sources */,
+				375285A31E06A363004AE801 /* NextLvlClass.swift in Sources */,
+				37B2E2411E05C8EC008D095A /* Utilities.swift in Sources */,
 				37AE57321E03257000C402D6 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -194,6 +526,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -216,7 +549,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -243,9 +576,11 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: lucansky.michal@gmail.com (W4YRV2KKWG)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -259,7 +594,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -271,10 +606,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = A9YN63GW95;
 				INFOPLIST_FILE = Pong/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.naturephotography.Pong;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.naturephotography.sk-PongFinal";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -284,10 +620,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = A9YN63GW95;
 				INFOPLIST_FILE = Pong/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.naturephotography.Pong;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.naturephotography.sk-PongFinal";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -312,6 +649,7 @@
 				37AE57481E03257000C402D6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
