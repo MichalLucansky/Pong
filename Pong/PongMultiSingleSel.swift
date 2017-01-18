@@ -19,6 +19,7 @@ class PongMultiSingleSel:SKScene{
     override func didMove(to view: SKView) {
         multiPlay = childNode(withName: "MULTIPLAYER") as! SKLabelNode
         single = childNode(withName: "SINGLEPLAYER") as! SKLabelNode
+        
     }
 
 
@@ -31,12 +32,13 @@ class PongMultiSingleSel:SKScene{
             
                 switch touchName {
                 case "MULTIPLAYER":
+                    PongMultiSingleSel.statusInit = false
                     if let view = self.view {
                         // Load the SKScene from 'GameScene.sks'
                         if let scene = Pong(fileNamed: "PongScene") {
                             // Set the scale mode to scale to fit the window
                             scene.scaleMode = .aspectFill
-                            PongMultiSingleSel.statusInit = true
+                        
                             // Present the scene
                             view.presentScene(scene,transition: SKTransition.flipHorizontal(withDuration: TimeInterval(1.5)))
                             
@@ -45,12 +47,14 @@ class PongMultiSingleSel:SKScene{
                         
                     }
                 case "SINGLEPLAYER":
+                    PongMultiSingleSel.statusInit = true
                     if let view = self.view {
+                        
                         // Load the SKScene from 'GameScene.sks'
                         if let scene = Pong(fileNamed: "PongScene") {
                             // Set the scale mode to scale to fit the window
                             scene.scaleMode = .aspectFill
-                          PongMultiSingleSel.statusInit = false
+                        
                             // Present the scene
                             view.presentScene(scene,transition: SKTransition.flipHorizontal(withDuration: TimeInterval(1.5)))
                             

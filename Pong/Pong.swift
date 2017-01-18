@@ -12,6 +12,7 @@ import GameplayKit
 class Pong: SKScene {
     var backgroundMusic: SKAudioNode!
     private var player = Player()
+    private var secondPlayer = Enemy()
     private var enemy = Enemy()
     private var ball = Ball()
     private var gamePauseEnd = SKLabelNode()
@@ -25,7 +26,7 @@ class Pong: SKScene {
     private var pauseVariable = Utilities()
     private var pauseStatus = false
     private var status  = PongMultiSingleSel.statusInit
-    
+    private var selectedNodes:[UITouch:SKSpriteNode] = [:]
     
     override func didMove(to view: SKView) {
         
@@ -93,7 +94,21 @@ class Pong: SKScene {
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches{
             let location = touch.location(in: self)
-     player.move(touchLocation: location)
+            
+   
+            
+            if let node = selectedNodes[touch] {
+                node.position.x = location.x
+                let minX : CGFloat = -260, maxX: CGFloat = 260
+                
+                position.x = node.position.x
+                if position.x > maxX{
+                    position.x = maxX
+                }
+                if position.x < minX{
+                    position.x = minX
+                }
+            }
             
             
         }
@@ -109,7 +124,16 @@ class Pong: SKScene {
         
         for touch in touches{
             let location = touch.location(in: self)
-            player.move(touchLocation: location)
+           
+            
+            if let node = self.atPoint(location) as? SKSpriteNode{
+                if node.name == "Player" || node.name == "Enemy"{
+                selectedNodes[touch] = node
+                
+                }
+            
+            
+            }
             
             if let touchName = atPoint(location).name{
                 
@@ -157,6 +181,15 @@ class Pong: SKScene {
         }
         
     }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        for touch in touches {
+            if selectedNodes[touch] != nil {
+                selectedNodes[touch] = nil
+            }
+        }
+    }
+    
     func gamePause(){
         
         
@@ -189,7 +222,7 @@ class Pong: SKScene {
         gameUnPause()
         }
         
-        if status{
+        if status {
         
         enemy.moveEnemy(ballPosition: ball, enemy: enemy)
         }
