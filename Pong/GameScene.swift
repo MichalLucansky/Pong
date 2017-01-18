@@ -30,8 +30,7 @@ class GameScene: SKScene {
     private var snake = [SKSpriteNode]()
 private var lastUpdateTime: CFTimeInterval = 0
     
-    private var timeSinceLastAlienSpawned: CFTimeInterval  = 0  // Seconds since the last alien was spawned
-
+    private var timeSinceLastMove: CFTimeInterval  = 0  // Seconds since the last move
     private enum SnakeDirection{
         
         case left
@@ -171,7 +170,7 @@ private var lastUpdateTime: CFTimeInterval = 0
         let maxX = CGFloat(worldSizeWidth / 2)//self.frame.size.width / 2
         let minX = CGFloat(worldSizeWidth / -2)//self.frame.size.width / -2
         let maxY = CGFloat(worldSizeHeight / 2 + 167)//self.frame.size.height / 2
-        let minY = CGFloat(worldSizeHeight / -2 + 167)//self.frame.size.height / -2
+        let minY = CGFloat(worldSizeHeight / -2 + 185)//self.frame.size.height / -2
         
         if snakeHead.position.x > maxX{
             snakeHead.position.x = minX
@@ -295,12 +294,11 @@ private var lastUpdateTime: CFTimeInterval = 0
         
     }
     func updateWithTimeSinceLastUpdate(timeSinceLastUpdate: CFTimeInterval) {
-        // If it's been more than a second since we spawned the last alien,
-        // spawn a new one
+   
      
-        timeSinceLastAlienSpawned += timeSinceLastUpdate
-        if (timeSinceLastAlienSpawned > 0.5) {
-            timeSinceLastAlienSpawned = 0
+        timeSinceLastMove += timeSinceLastUpdate
+        if (timeSinceLastMove > 0.5) {
+            timeSinceLastMove = 0
             
             snakeTransition(snakeHead: snake[0])
                snakeBodyMoving()
