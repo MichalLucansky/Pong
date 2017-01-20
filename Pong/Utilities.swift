@@ -10,17 +10,17 @@ import SpriteKit
 
 class Utilities: SKScene {
     
-    
    
-    func randomSpriteGenerator(height: CGFloat, width: CGFloat, position: CGPoint) -> SKSpriteNode{
+   
+    func randomSpriteGenerator(position: CGPoint, width: CGFloat) -> SKSpriteNode{
     
         let obstacle = SKSpriteNode()
-        obstacle.size.height = height
+        obstacle.size.height = 40
         obstacle.size.width = width
         obstacle.position = position
         obstacle.name = "Obstacle"
         obstacle.color = UIColor.blue
-        obstacle.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: width, height: height))
+        obstacle.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: width , height: 40))
         obstacle.physicsBody?.isDynamic = false
         obstacle.physicsBody?.affectedByGravity = false
         obstacle.anchorPoint = CGPoint(x: 0.5, y: 0.5)
@@ -35,6 +35,30 @@ class Utilities: SKScene {
     
     
     return obstacle
+    }
+    
+    func staticSpriteGenerator(position: CGPoint, width : CGFloat) -> SKSpriteNode{
+        
+        let staticObstacle = SKSpriteNode()
+        staticObstacle.size.height = 40
+        staticObstacle.size.width = width
+        staticObstacle.position = position
+        staticObstacle.name = "staticObstacle"
+        staticObstacle.color = UIColor.blue
+        staticObstacle.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: width , height: 40))
+        staticObstacle.physicsBody?.isDynamic = false
+        staticObstacle.physicsBody?.affectedByGravity = false
+        staticObstacle.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+                
+        
+        
+        
+        
+        
+        
+        
+        
+        return staticObstacle
     }
     
     func randomNumberGenerator ()-> CGFloat{

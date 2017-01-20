@@ -13,7 +13,7 @@ class VictoryScene: SKScene{
     
     private var nextLvlLabel = SKLabelNode()
     private var backToMenu = SKLabelNode()
-    
+    var backgroundMusic: SKAudioNode!
 
 
     override func didMove(to view: SKView) {
@@ -21,7 +21,10 @@ class VictoryScene: SKScene{
         
         nextLvlLabel = self.childNode(withName: "NextLvlLabel") as! SKLabelNode
         backToMenu = self.childNode(withName: "BackToMenu") as! SKLabelNode
-        
+        if let musicURL = Bundle.main.url(forResource: "08 Ascending", withExtension: "mp3") {
+            backgroundMusic = SKAudioNode(url: musicURL)
+            addChild(backgroundMusic)
+        }
     }
     
     

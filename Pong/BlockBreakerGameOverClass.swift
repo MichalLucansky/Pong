@@ -11,16 +11,25 @@ import SpriteKit
 
 class BlockBreakerGameOver: SKScene {
     
-    
-    
+    private var highScore = UserDefaults.standard
+    private var highScoreLabel = SKLabelNode()
     private var playAgainLabel = SKLabelNode()
     private var backToMenu = SKLabelNode()
+    private var lvlStatus = BlockBreaker.nextLvlInit
+    private var actualScore = Int()
+    
+    
     
     override func didMove(to view: SKView) {
         
+        actualScore = highScore.integer(forKey: "highScore")
+        print(actualScore)
+      
         
+        highScoreLabel = self.childNode(withName: "highScore") as! SKLabelNode
         playAgainLabel = self.childNode(withName: "PlayAgainLabel") as! SKLabelNode
         backToMenu = self.childNode(withName: "BackToMenu") as! SKLabelNode
+        highScoreLabel.text = "\(actualScore)"
         
     }
     
@@ -40,7 +49,9 @@ class BlockBreakerGameOver: SKScene {
                 switch touchName {
                     
                 case "PlayAgainLabel":
+                    BlockBreaker.nextLvlInit = false
                     if let view = self.view {
+                        
                         // Load the SKScene from 'GameScene.sks'
                         if let scene = BlockBreaker(fileNamed: "BlockBreakerScene") {
                             // Set the scale mode to scale to fit the window

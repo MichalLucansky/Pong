@@ -24,19 +24,7 @@ class Enemy: SKSpriteNode {
     }
 
     
-    func moveSecondPlayer (touchLocation : CGPoint){
-        let minX : CGFloat = -260, maxX: CGFloat = 260
-        
-        position.x = touchLocation.x
-        if position.x > maxX{
-            position.x = maxX
-        }
-        if position.x < minX{
-            position.x = minX
-        }
-        
-        
-    }
+  
 
 
 }

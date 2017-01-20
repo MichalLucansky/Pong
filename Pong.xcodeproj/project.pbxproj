@@ -46,6 +46,7 @@
 		37CD33B81E2E71E50093991B /* 02 HHavok-main.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 37CD33B71E2E71E50093991B /* 02 HHavok-main.mp3 */; };
 		37CD33BA1E2E76AC0093991B /* EndGameLost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CD33B91E2E76AC0093991B /* EndGameLost.swift */; };
 		37CD33BC1E2E76E40093991B /* EndGameLost.sks in Resources */ = {isa = PBXBuildFile; fileRef = 37CD33BB1E2E76E40093991B /* EndGameLost.sks */; };
+		37D2DABB1E30AE890036584A /* 08 Ascending.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 37D2DABA1E30AE890036584A /* 08 Ascending.mp3 */; };
 		37D348171E067DBD00A4FE51 /* BlockBreakerClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D348161E067DBD00A4FE51 /* BlockBreakerClass.swift */; };
 		37D348191E067DEB00A4FE51 /* BlockBreakerScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 37D348181E067DEB00A4FE51 /* BlockBreakerScene.sks */; };
 		37EAD16E1E2F5DFC00EB1A53 /* PongMultiSingleSel.sks in Resources */ = {isa = PBXBuildFile; fileRef = 37EAD16D1E2F5DFC00EB1A53 /* PongMultiSingleSel.sks */; };
@@ -94,6 +95,7 @@
 		37CD33B71E2E71E50093991B /* 02 HHavok-main.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "02 HHavok-main.mp3"; sourceTree = "<group>"; };
 		37CD33B91E2E76AC0093991B /* EndGameLost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndGameLost.swift; sourceTree = "<group>"; };
 		37CD33BB1E2E76E40093991B /* EndGameLost.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = EndGameLost.sks; sourceTree = "<group>"; };
+		37D2DABA1E30AE890036584A /* 08 Ascending.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "08 Ascending.mp3"; sourceTree = "<group>"; };
 		37D348161E067DBD00A4FE51 /* BlockBreakerClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockBreakerClass.swift; sourceTree = "<group>"; };
 		37D348181E067DEB00A4FE51 /* BlockBreakerScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BlockBreakerScene.sks; sourceTree = "<group>"; };
 		37EAD16D1E2F5DFC00EB1A53 /* PongMultiSingleSel.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PongMultiSingleSel.sks; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 				37AE57391E03257000C402D6 /* GameViewController.swift */,
 				37AE573B1E03257000C402D6 /* Main.storyboard */,
 				37AE573E1E03257000C402D6 /* Assets.xcassets */,
+				37D2DABA1E30AE890036584A /* 08 Ascending.mp3 */,
 				37CD33B71E2E71E50093991B /* 02 HHavok-main.mp3 */,
 				37615B081E2D2671006B7485 /* 03 Chibi Ninja.mp3 */,
 				37615B061E2D2584006B7485 /* 01 A Night Of Dizzy Spells.mp3 */,
@@ -441,6 +444,7 @@
 				37AE573F1E03257000C402D6 /* Assets.xcassets in Resources */,
 				37BEC1E91E105917009F5E5C /* VictoryScene.sks in Resources */,
 				37615B011E2D1801006B7485 /* shoot.wav in Resources */,
+				37D2DABB1E30AE890036584A /* 08 Ascending.mp3 in Resources */,
 				37D348191E067DEB00A4FE51 /* BlockBreakerScene.sks in Resources */,
 				37AE57511E0338C600C402D6 /* LCDPHONE.TTF in Resources */,
 				37B2E2361E055D1F008D095A /* MainMenu.sks in Resources */,

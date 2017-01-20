@@ -20,6 +20,8 @@ class GameOverSceneSpaceInvaders: SKScene{
         
         playAgainLabel = self.childNode(withName: "PlayAgainLabel") as! SKLabelNode
         backToMenu = self.childNode(withName: "BackToMenu") as! SKLabelNode
+       
+
         
     }
     

@@ -10,16 +10,19 @@ import SpriteKit
 
 
 class EndGameLost: SKScene{
-
 private var mainMenu = SKLabelNode()
 private var playAgain = SKLabelNode()
-    
+   var backgroundMusic: SKAudioNode! 
     
 
 
     override func didMove(to view: SKView) {
         mainMenu = childNode(withName: "MainMenu") as! SKLabelNode
         playAgain = childNode(withName: "PlayAgainLabel") as! SKLabelNode
+        if let musicURL = Bundle.main.url(forResource: "08 Ascending", withExtension: "mp3") {
+            backgroundMusic = SKAudioNode(url: musicURL)
+            addChild(backgroundMusic)
+        }
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches{

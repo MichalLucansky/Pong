@@ -11,7 +11,7 @@ import SpriteKit
 
 class PongMultiSingleSel:SKScene{
 
-
+var backgroundMusic: SKAudioNode!
     private var multiPlay = SKLabelNode()
     private var single = SKLabelNode()
     static var statusInit = Bool()
@@ -19,7 +19,10 @@ class PongMultiSingleSel:SKScene{
     override func didMove(to view: SKView) {
         multiPlay = childNode(withName: "MULTIPLAYER") as! SKLabelNode
         single = childNode(withName: "SINGLEPLAYER") as! SKLabelNode
-        
+        if let musicURL = Bundle.main.url(forResource: "08 Ascending", withExtension: "mp3") {
+            backgroundMusic = SKAudioNode(url: musicURL)
+            addChild(backgroundMusic)
+        }
     }
 
 

@@ -11,10 +11,10 @@ import SpriteKit
 
 class Ball: SKSpriteNode{
     
-    func ballMove (ball:SKSpriteNode){
+    func ballMove (ball:SKSpriteNode, speedX: CGFloat, speedY: CGFloat){
         
         
-        ball.physicsBody?.applyImpulse(CGVector(dx: -15, dy: 15))
+        ball.physicsBody?.applyImpulse(CGVector(dx: speedX, dy: speedY))
         
         
         
