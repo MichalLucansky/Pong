@@ -14,10 +14,12 @@ class NextLvlClass: SKScene{
     
     private var nextLvlLabel = SKLabelNode()
     private var backToMenu = SKLabelNode()
+    private var gameId = UserDefaults.standard
     
     override func didMove(to view: SKView) {
         
-        
+       
+       
         nextLvlLabel = self.childNode(withName: "NextLvlLabel") as! SKLabelNode
         backToMenu = self.childNode(withName: "BackToMenu") as! SKLabelNode
         
@@ -39,10 +41,13 @@ class NextLvlClass: SKScene{
                 switch touchName {
                     
                 case "NextLvlLabel":
+                     let id = gameId.integer(forKey: "ID")
+                     if id == 1{
                     if let view = self.view {
-                        // Load the SKScene from 'GameScene.sks'
+                        
+                        
                         if let scene = BlockBreaker(fileNamed: "BlockBreakerScene") {
-                            // Set the scale mode to scale to fit the window
+                           
                             scene.scaleMode = .aspectFill
                             
                             // Present the scene
@@ -50,6 +55,25 @@ class NextLvlClass: SKScene{
                         }
                         
                         
+                    }
+                     }else if id == 2{
+                    
+                        if let view = self.view {
+                            
+                            
+                            if let scene = SpaceInvadersClass(fileNamed: "SpaceInvadersScene") {
+                                
+                                scene.scaleMode = .aspectFill
+                                
+                                // Present the scene
+                                view.presentScene(scene,transition: SKTransition.flipHorizontal(withDuration: TimeInterval(1.5)))
+                            }
+                            
+                            
+                        }
+
+                    
+                    
                     }
                 case "BackToMenu" :
                     if let view = self.view {

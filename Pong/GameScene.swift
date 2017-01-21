@@ -52,7 +52,7 @@ private var lastUpdateTime: CFTimeInterval = 0
         up = (childNode(withName: "Up") as? SKSpriteNode)!
         border = (childNode(withName: "Border") as? SKSpriteNode)!
         snake.append(createSnakeHead())
-    rowsAndCollumnNumber()
+   
        
         
            }

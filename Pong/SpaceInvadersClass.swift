@@ -11,19 +11,26 @@ import SpriteKit
 class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
     var backgroundMusic: SKAudioNode!
     private var shipLiveLabel = SKLabelNode()
+    private var scoreLabel = SKLabelNode()
+    private var life1 = SKSpriteNode()
+    private var life2 = SKSpriteNode()
+    private var life3 = SKSpriteNode()
+    private var pauseLabel = SKLabelNode()
+    private var unPauseLabel = SKLabelNode()
     private var enemy = Enemy()
     private var ship = Player()
     private var shot = Player()
     private var invadersCount = 24
-    private var shipLiveCount = 100
+    private var shipLiveCount = [SKSpriteNode]()
     private var shotCount = 1
     private let maxX = CGFloat(339)
     private let minX = CGFloat(-349)
-   
-    private var  timeOfLastMove : CFTimeInterval = 0.0
-    private var  timePerMove : CFTimeInterval = 0.8
+    private var score = 0
+    private var timeOfLastMove : CFTimeInterval = 0.0
+    private var timePerMove : CFTimeInterval = 0.8
     private var invaderMovementDirection: InvaderMoveDirection = .right
-    
+    private var gameId = UserDefaults.standard
+    private var spaceInvadersScore = UserDefaults.standard
     
     private let shipFiredBullet = "shipFiredBullet"
     private let invaderFiredBullet = "invaderFiredBullet"
@@ -46,7 +53,10 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
     }
     
     override func didMove(to view: SKView) {
-        
+        shipLiveCount = [childNode(withName: "life1") as! SKSpriteNode,
+                        childNode(withName: "life2") as! SKSpriteNode,
+                        childNode(withName: "life3") as! SKSpriteNode
+                        ]
         initialization()
         self.physicsWorld.contactDelegate = self
         if let musicURL = Bundle.main.url(forResource: "01 A Night Of Dizzy Spells", withExtension: "mp3") {
@@ -185,11 +195,11 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
         {node, stop in
             switch self.invaderMovementDirection{
             case .right :
-                node.position = CGPoint(x: node.position.x + 15, y: node.position.y)
+                node.position = CGPoint(x: node.position.x + 30, y: node.position.y)
             case . left:
                 node.position = CGPoint(x: node.position.x - 30, y: node.position.y)
             case .downLeft, .downRight:
-                node.position = CGPoint(x: node.position.x, y: node.position.y - 30)
+                node.position = CGPoint(x: node.position.x, y: node.position.y - 60)
                 
             case.none:
                 break
@@ -224,7 +234,7 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
                     
                 }
             case.left:
-                if (node.position.x <= CGFloat(-325)){
+                if (node.position.x <= CGFloat(-320)){
                     
                     
                     self.invaderMovementDirection = .downRight
@@ -256,9 +266,42 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
         for touch in touches{
       let location = touch.location(in: self)
             
+            if atPoint(location).name == "ship"{
+                ship.move(touchLocation: location)
+            }
             
-          
-                    ship.move(touchLocation: location)
+            if let locationName = atPoint(location).name{
+                switch locationName{
+                case "Pause":
+                    self.scene?.isPaused = true
+                    self.physicsWorld.speed = 0
+                    pauseLabel.isHidden = true
+                    unPauseLabel.isHidden = false
+                    
+                case "EndGame":
+                    gameId.set(2, forKey: "ID")
+                    if let view = self.view {
+                        if let scene = BlockBreakerGameOver(fileNamed: "BlockBreakerGameOver") {
+                            scene.scaleMode = .aspectFill
+                            view.presentScene(scene,transition: SKTransition.flipHorizontal(withDuration: TimeInterval(1.5)))
+                        }
+                        
+                        
+                    }
+                case "unpause":
+                    self.scene?.isPaused = false
+
+                    self.physicsWorld.speed = 1
+                    pauseLabel.isHidden = false
+                    unPauseLabel.isHidden = true
+                default:
+                    break
+                }
+                
+            }
+            
+            
+            
         }
     }
     
@@ -274,23 +317,35 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
             
             
             
+            
                     }
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches{
             let location = touch.location(in: self)
-            ship.move(touchLocation: location)
+            if atPoint(location).name == "ship"{
+                ship.move(touchLocation: location)
+            }
+            
         }
     }
 
     
   
     private func initialization(){
-    
+        if spaceInvadersScore.value(forKey: "SpaceInvaders") == nil{
+            spaceInvadersScore.set(score, forKey: "SpaceInvaders")
+        
+        }
+        
+        unPauseLabel.isHidden = true
+        scoreLabel = childNode(withName: "score") as! SKLabelNode
         ship = childNode(withName: "ship") as! Player
         enemy = childNode(withName: "invaders") as! Enemy
-        shipLiveLabel = childNode(withName: "shipLifeCount") as! SKLabelNode
+        unPauseLabel = childNode(withName: "unpause") as! SKLabelNode
+        pauseLabel = childNode(withName: "Pause") as! SKLabelNode
+        
         
         
     }
@@ -303,14 +358,19 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
          contact.bodyA.node!.removeFromParent()
          contact.bodyB.node!.removeFromParent()
             self.run(SKAction.playSoundFileNamed("invaderkilled.wav", waitForCompletion: false))
+            score += 5
             shotCount = 1
             invadersCount -= 1
         
         }
         if nodeNames.contains(invaderFiredBullet) && nodeNames.contains("ship"){
             self.run(SKAction.playSoundFileNamed("explosion.wav", waitForCompletion: false))
-            shipLiveCount -= 10
-            shipLiveLabel.text = ("Ship live : \(shipLiveCount)")
+           
+            let shipToDelete = shipLiveCount.removeLast()
+            
+            shipToDelete.removeFromParent()
+            
+            
         
         }
         
@@ -321,10 +381,15 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
  
     
     private func endGame(){
+        if score > spaceInvadersScore.integer(forKey: "SpaceInvaders"){
+        spaceInvadersScore.set(score, forKey: "SpaceInvaders")
         
+        }
+        
+        gameId.set(2, forKey: "ID")
         let lowLvl = CGFloat(-400)
     
-        if shipLiveCount == 0 {
+        if shipLiveCount.count == 0 {
      
         ship.removeFromParent()
 
@@ -350,7 +415,7 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
             
             if let view = self.view {
                 // Load the SKScene from 'GameScene.sks'
-                if let scene = VictoryScene(fileNamed: "VictoryScene") {
+                if let scene = NextLvlClass(fileNamed: "NextLvlScene") {
                     // Set the scale mode to scale to fit the window
                     scene.scaleMode = .aspectFill
                     
@@ -370,6 +435,7 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
         enumerateChildNodes(withName: "invaders") {
          node, stop in
             if ((node.frame.minY) <= lowLvl){
+                self.gameId.set(1, forKey: "ID")
                 if let view = self.view {
                     // Load the SKScene from 'GameScene.sks'
                     if let scene = GameOverSceneSpaceInvaders(fileNamed: "GameOverSceneSpaceInvaders") {
@@ -398,7 +464,7 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
     
     
     override func update(_ currentTime: TimeInterval) {
-        
+        scoreLabel.text = "SCORE: \(score)"
         self.invaderFired(forUpdate: currentTime)
         self.moveInvader(forUpdate: currentTime)
         self.endGame()

@@ -41,8 +41,6 @@
 		37B2E2411E05C8EC008D095A /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B2E2401E05C8EC008D095A /* Utilities.swift */; };
 		37BEC1E21E104953009F5E5C /* GameOverSpaceInvaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BEC1E11E104953009F5E5C /* GameOverSpaceInvaders.swift */; };
 		37BEC1E41E1049F2009F5E5C /* GameOverSpaceInvaders.sks in Resources */ = {isa = PBXBuildFile; fileRef = 37BEC1E31E1049F2009F5E5C /* GameOverSpaceInvaders.sks */; };
-		37BEC1E91E105917009F5E5C /* VictoryScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 37BEC1E81E105917009F5E5C /* VictoryScene.sks */; };
-		37BEC1EB1E105929009F5E5C /* VictoryClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BEC1EA1E105929009F5E5C /* VictoryClass.swift */; };
 		37CD33B81E2E71E50093991B /* 02 HHavok-main.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 37CD33B71E2E71E50093991B /* 02 HHavok-main.mp3 */; };
 		37CD33BA1E2E76AC0093991B /* EndGameLost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CD33B91E2E76AC0093991B /* EndGameLost.swift */; };
 		37CD33BC1E2E76E40093991B /* EndGameLost.sks in Resources */ = {isa = PBXBuildFile; fileRef = 37CD33BB1E2E76E40093991B /* EndGameLost.sks */; };
@@ -90,8 +88,6 @@
 		37B2E2401E05C8EC008D095A /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		37BEC1E11E104953009F5E5C /* GameOverSpaceInvaders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverSpaceInvaders.swift; sourceTree = "<group>"; };
 		37BEC1E31E1049F2009F5E5C /* GameOverSpaceInvaders.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameOverSpaceInvaders.sks; sourceTree = "<group>"; };
-		37BEC1E81E105917009F5E5C /* VictoryScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = VictoryScene.sks; sourceTree = "<group>"; };
-		37BEC1EA1E105929009F5E5C /* VictoryClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VictoryClass.swift; sourceTree = "<group>"; };
 		37CD33B71E2E71E50093991B /* 02 HHavok-main.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "02 HHavok-main.mp3"; sourceTree = "<group>"; };
 		37CD33B91E2E76AC0093991B /* EndGameLost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndGameLost.swift; sourceTree = "<group>"; };
 		37CD33BB1E2E76E40093991B /* EndGameLost.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = EndGameLost.sks; sourceTree = "<group>"; };
@@ -302,7 +298,6 @@
 		37BEC1E01E10491E009F5E5C /* SpaceInvadersEndScenes */ = {
 			isa = PBXGroup;
 			children = (
-				37BEC1E71E1058FD009F5E5C /* Win */,
 				37BEC1E61E1058E1009F5E5C /* GameOver */,
 			);
 			name = SpaceInvadersEndScenes;
@@ -324,15 +319,6 @@
 				37BEC1E11E104953009F5E5C /* GameOverSpaceInvaders.swift */,
 			);
 			name = GameOver;
-			sourceTree = "<group>";
-		};
-		37BEC1E71E1058FD009F5E5C /* Win */ = {
-			isa = PBXGroup;
-			children = (
-				37BEC1E81E105917009F5E5C /* VictoryScene.sks */,
-				37BEC1EA1E105929009F5E5C /* VictoryClass.swift */,
-			);
-			name = Win;
 			sourceTree = "<group>";
 		};
 		37BEC1EC1E105B8D009F5E5C /* Snake */ = {
@@ -442,7 +428,6 @@
 				37CD33B81E2E71E50093991B /* 02 HHavok-main.mp3 in Resources */,
 				37AE57341E03257000C402D6 /* PongScene.sks in Resources */,
 				37AE573F1E03257000C402D6 /* Assets.xcassets in Resources */,
-				37BEC1E91E105917009F5E5C /* VictoryScene.sks in Resources */,
 				37615B011E2D1801006B7485 /* shoot.wav in Resources */,
 				37D2DABB1E30AE890036584A /* 08 Ascending.mp3 in Resources */,
 				37D348191E067DEB00A4FE51 /* BlockBreakerScene.sks in Resources */,
@@ -473,7 +458,6 @@
 				37EAD1701E2F5E0B00EB1A53 /* PongMultiSingleSel.swift in Sources */,
 				37615B111E2D2ACD006B7485 /* GameOverClass.swift in Sources */,
 				37B2E2381E055D2C008D095A /* MainMenu.swift in Sources */,
-				37BEC1EB1E105929009F5E5C /* VictoryClass.swift in Sources */,
 				37AE57541E033BFE00C402D6 /* Enemy.swift in Sources */,
 				37AE574D1E03263800C402D6 /* Player.swift in Sources */,
 				37D348171E067DBD00A4FE51 /* BlockBreakerClass.swift in Sources */,

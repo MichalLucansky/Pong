@@ -17,15 +17,23 @@ class BlockBreakerGameOver: SKScene {
     private var backToMenu = SKLabelNode()
     private var lvlStatus = BlockBreaker.nextLvlInit
     private var actualScore = Int()
-    
-    
+    private var gameId = UserDefaults.standard
     
     override func didMove(to view: SKView) {
+       
         
-        actualScore = highScore.integer(forKey: "highScore")
-        print(actualScore)
-      
+        let id = gameId.integer(forKey: "ID")
+        print(id)
+        if id == 1{
+            actualScore = highScore.integer(forKey: "highScore")
         
+        }else if id == 2{
+            actualScore = highScore.integer(forKey: "SpaceInvaders")
+        
+        
+        
+        }
+       // actualScore = highScore.integer(forKey: "highScore")
         highScoreLabel = self.childNode(withName: "highScore") as! SKLabelNode
         playAgainLabel = self.childNode(withName: "PlayAgainLabel") as! SKLabelNode
         backToMenu = self.childNode(withName: "BackToMenu") as! SKLabelNode
@@ -35,7 +43,6 @@ class BlockBreakerGameOver: SKScene {
     
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
         for touch in touches{
             let location = touch.location(in: self)
             
