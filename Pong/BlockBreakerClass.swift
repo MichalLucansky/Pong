@@ -60,7 +60,7 @@ class BlockBreaker: SKScene, SKPhysicsContactDelegate{
             
             if BlockBreaker.nextLvlInit {
                 let cislo = Int(randomNumber.randomNumberGenerator(start: 1, end: 5))
-                print(cislo)
+                
                 while i != cislo{
                     BlockBreaker.nextLvlInit = true
                 self.addChild(obstacle.staticSpriteGenerator(position: CGPoint(x: randomNumber.randomNumberGenerator(start: -360, end: 360), y: 0), width:  randomNumber.randomNumberGenerator(start: 60, end: 110)))

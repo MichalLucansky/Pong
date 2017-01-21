@@ -133,7 +133,7 @@ private var lastUpdateTime: CFTimeInterval = 0
 
     let collumnsPozitive = Int(720 / 40) //Int(self.frame.width / 40)
   
-    print(rowsPozitive, collumnsPozitive)
+   
     
         return (rowsPozitive, collumnsPozitive)
     
@@ -193,7 +193,7 @@ private var lastUpdateTime: CFTimeInterval = 0
     snake[0].position.x = snake[0].position.x + moveX
     snake[0].position.y = snake[0].position.y + moveY
     snake[0].zRotation = rotation
-        print(rotation)
+       
     }
     
     func randomNumberGenerator(start: Int, end: Int) -> CGFloat{

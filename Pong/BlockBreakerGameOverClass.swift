@@ -23,7 +23,7 @@ class BlockBreakerGameOver: SKScene {
        
         
         let id = gameId.integer(forKey: "ID")
-        print(id)
+       
         if id == 1{
             actualScore = highScore.integer(forKey: "highScore")
         
@@ -33,7 +33,7 @@ class BlockBreakerGameOver: SKScene {
         
         
         }
-       // actualScore = highScore.integer(forKey: "highScore")
+       
         highScoreLabel = self.childNode(withName: "highScore") as! SKLabelNode
         playAgainLabel = self.childNode(withName: "PlayAgainLabel") as! SKLabelNode
         backToMenu = self.childNode(withName: "BackToMenu") as! SKLabelNode

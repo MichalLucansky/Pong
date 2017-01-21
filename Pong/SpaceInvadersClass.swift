@@ -26,16 +26,18 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
     private let maxX = CGFloat(339)
     private let minX = CGFloat(-349)
     private var score = 0
+    static var scoreToPass = Int()
     private var timeOfLastMove : CFTimeInterval = 0.0
     private var timePerMove : CFTimeInterval = 0.8
     private var invaderMovementDirection: InvaderMoveDirection = .right
     private var gameId = UserDefaults.standard
     private var spaceInvadersScore = UserDefaults.standard
+    private var  asteroidPositionArray = [CGPoint(x: -180, y: -400), CGPoint(x: 0, y: -400), CGPoint(x: 180, y: -400)]
     
     private let shipFiredBullet = "shipFiredBullet"
     private let invaderFiredBullet = "invaderFiredBullet"
     private let bulletSize = CGSize(width:4, height:8)
-    
+    static var nextLvlSpaceInvaders = false
     
     private enum BulletType{
         case shipFiredBullet
@@ -53,6 +55,18 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
     }
     
     override func didMove(to view: SKView) {
+        
+       
+        if SpaceInvadersClass.nextLvlSpaceInvaders{
+            score = SpaceInvadersClass.scoreToPass
+        for i in 0..<3{
+       addChild(asteroidCreator(position: asteroidPositionArray[i]))
+            
+            }
+        }
+        
+        
+        
         shipLiveCount = [childNode(withName: "life1") as! SKSpriteNode,
                         childNode(withName: "life2") as! SKSpriteNode,
                         childNode(withName: "life3") as! SKSpriteNode
@@ -66,6 +80,32 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
 
 
         
+    }
+    
+    private func asteroidCreator(position: CGPoint) -> SKSpriteNode{
+    
+        let asteroid = SKSpriteNode()
+        let asteroidCategoryMask : UInt32 = 0x1 << 1
+        let asteroidCollisionMask : UInt32 = 0x1 << 2
+        let asteroidContactMask : UInt32 = 0x1 << 2
+        
+        asteroid.size = CGSize(width: 60, height: 60)
+        asteroid.name = "asteroid"
+        asteroid.color = UIColor.brown
+        asteroid.position = position
+        asteroid.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        asteroid.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 60, height: 60))
+        asteroid.physicsBody?.isDynamic = false
+        asteroid.physicsBody?.affectedByGravity = false
+        asteroid.physicsBody?.categoryBitMask = asteroidCategoryMask
+        asteroid.physicsBody?.collisionBitMask = asteroidCollisionMask
+        asteroid.physicsBody?.contactTestBitMask = asteroidContactMask
+    
+    
+    
+    
+    
+        return asteroid
     }
     
     private func bulletCreator(bulletType: BulletType)-> SKSpriteNode{
@@ -279,7 +319,9 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
                     unPauseLabel.isHidden = false
                     
                 case "EndGame":
+                    SpaceInvadersClass.scoreToPass = score
                     gameId.set(2, forKey: "ID")
+                    
                     if let view = self.view {
                         if let scene = BlockBreakerGameOver(fileNamed: "BlockBreakerGameOver") {
                             scene.scaleMode = .aspectFill
@@ -374,6 +416,14 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
         
         }
         
+        if nodeNames.contains(shipFiredBullet) && nodeNames.contains("asteroid"){
+            
+         contact.bodyB.node!.removeFromParent()
+        //contact.bodyA.node!.removeFromParent()
+        
+        
+        }
+        
         
             }
     
@@ -381,6 +431,7 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
  
     
     private func endGame(){
+         SpaceInvadersClass.scoreToPass = score
         if score > spaceInvadersScore.integer(forKey: "SpaceInvaders"){
         spaceInvadersScore.set(score, forKey: "SpaceInvaders")
         
@@ -397,7 +448,7 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
             
             if let view = self.view {
                 // Load the SKScene from 'GameScene.sks'
-                if let scene = GameOverSceneSpaceInvaders(fileNamed: "GameOverSpaceInvaders") {
+                 if let scene = BlockBreakerGameOver(fileNamed: "BlockBreakerGameOver") {
                     // Set the scale mode to scale to fit the window
                     scene.scaleMode = .aspectFill
                     
@@ -412,7 +463,7 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
         }
         
         if invadersCount == 0{
-            
+            SpaceInvadersClass.nextLvlSpaceInvaders = true
             if let view = self.view {
                 // Load the SKScene from 'GameScene.sks'
                 if let scene = NextLvlClass(fileNamed: "NextLvlScene") {
@@ -435,10 +486,10 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
         enumerateChildNodes(withName: "invaders") {
          node, stop in
             if ((node.frame.minY) <= lowLvl){
-                self.gameId.set(1, forKey: "ID")
+                self.gameId.set(2, forKey: "ID")
                 if let view = self.view {
                     // Load the SKScene from 'GameScene.sks'
-                    if let scene = GameOverSceneSpaceInvaders(fileNamed: "GameOverSceneSpaceInvaders") {
+                     if let scene = BlockBreakerGameOver(fileNamed: "BlockBreakerGameOver") {
                         // Set the scale mode to scale to fit the window
                         scene.scaleMode = .aspectFill
                         

@@ -35,7 +35,7 @@ class Pong: SKScene {
         if let musicURL = Bundle.main.url(forResource: "02 HHavok-main", withExtension: "mp3") {
             backgroundMusic = SKAudioNode(url: musicURL)
             addChild(backgroundMusic)
-            print(status)
+           
         }
 
     }
@@ -153,15 +153,14 @@ class Pong: SKScene {
                     }
                     
                 case "Pause":
-                    print("Pause")
-                  pauseStatus = true
+                                     pauseStatus = true
                     pause.isHidden = true
                     gamePauseEnd.isHidden = false
                    
                     
                   case "GAMEISPAUSED":
                   
-                    print("Pause end")
+                    
                     pauseStatus = false
                     pause.isHidden = false
                     gamePauseEnd.isHidden = true
