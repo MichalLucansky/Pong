@@ -75,7 +75,7 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
     }
     
     override func didMove(to view: SKView) {
-        score = SpaceInvadersClass.scoreToPass
+        
        print(SpaceInvadersClass.lifeCount)
         switch SpaceInvadersClass.lifeCount {
         case 1 :
