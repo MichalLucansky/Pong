@@ -12,7 +12,7 @@ class Utilities: SKScene {
     
    
    
-    func randomSpriteGenerator(position: CGPoint, width: CGFloat) -> SKSpriteNode{
+    func randomSpriteGenerator(position: CGPoint, width: CGFloat, height: CGFloat) -> SKSpriteNode{
     
         let obstacle = SKSpriteNode()
         obstacle.size.height = 40

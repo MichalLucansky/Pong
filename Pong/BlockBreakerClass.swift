@@ -76,7 +76,7 @@ class BlockBreaker: SKScene, SKPhysicsContactDelegate{
      private func addObstacle(){
         
        
-        self.addChild(obstacle.randomSpriteGenerator(position: CGPoint(x: -400, y: 150), width:  randomNumber.randomNumberGenerator(start: 120, end: 300)))
+        self.addChild(obstacle.randomSpriteGenerator(position: CGPoint(x: -400, y: 150), width:  randomNumber.randomNumberGenerator(start: 120, end: 300), height: 40))
         obstacleNumber += 1
         
     }

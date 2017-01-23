@@ -29,10 +29,12 @@ class BlockBreakerGameOver: SKScene {
         
         }else if id == 2{
             actualScore = highScore.integer(forKey: "SpaceInvaders")
+        }else if id == 3{
         
-        
-        
+            actualScore = highScore.integer(forKey: "Snake")
         }
+        
+        
        
         highScoreLabel = self.childNode(withName: "highScore") as! SKLabelNode
         playAgainLabel = self.childNode(withName: "PlayAgainLabel") as! SKLabelNode
@@ -43,6 +45,8 @@ class BlockBreakerGameOver: SKScene {
     
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let id = gameId.integer(forKey: "ID")
+
         for touch in touches{
             let location = touch.location(in: self)
             
@@ -54,9 +58,12 @@ class BlockBreakerGameOver: SKScene {
                 
                 
                 switch touchName {
-                    
+                
+  
                 case "PlayAgainLabel":
-                    BlockBreaker.nextLvlInit = false
+                    
+                    if id == 1 {
+                        BlockBreaker.nextLvlInit = false
                     if let view = self.view {
                         
                         // Load the SKScene from 'GameScene.sks'
@@ -69,6 +76,41 @@ class BlockBreakerGameOver: SKScene {
                         }
                         
                         
+                    }
+                    }else if id == 2{
+                        SpaceInvadersClass.lvl = 1
+                        if let view = self.view {
+                            
+                            // Load the SKScene from 'GameScene.sks'
+                            if let scene = SpaceInvadersClass(fileNamed: "SpaceInvadersScene") {
+                                // Set the scale mode to scale to fit the window
+                                scene.scaleMode = .aspectFill
+                                
+                                // Present the scene
+                                view.presentScene(scene,transition: SKTransition.flipHorizontal(withDuration: TimeInterval(1.5)))
+                            }
+                            
+                            
+                        }
+                    
+                    }else{
+                        if let view = self.view {
+                            
+                            // Load the SKScene from 'GameScene.sks'
+                            if let scene = GameScene(fileNamed: "GameScene") {
+                                // Set the scale mode to scale to fit the window
+                                scene.scaleMode = .aspectFill
+                                
+                                // Present the scene
+                                view.presentScene(scene,transition: SKTransition.flipHorizontal(withDuration: TimeInterval(1.5)))
+                            }
+                            
+                            
+                        }
+                    
+                    
+                    
+                    
                     }
                 case "BackToMenu" :
                     if let view = self.view {

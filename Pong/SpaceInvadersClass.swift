@@ -17,11 +17,11 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
     private var life3 = SKSpriteNode()
     private var pauseLabel = SKLabelNode()
     private var unPauseLabel = SKLabelNode()
-    private var enemy = Enemy()
+    private var bossInvadeLife = 100
     private var ship = Player()
     private var shot = Player()
     private var invadersCount = 24
-    private var shipLiveCount = [SKSpriteNode]()
+    static var shipLiveCount = [SKSpriteNode]()
     private var shotCount = 1
     private let maxX = CGFloat(339)
     private let minX = CGFloat(-349)
@@ -33,15 +33,35 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
     private var gameId = UserDefaults.standard
     private var spaceInvadersScore = UserDefaults.standard
     private var  asteroidPositionArray = [CGPoint(x: -180, y: -400), CGPoint(x: 0, y: -400), CGPoint(x: 180, y: -400)]
-    
     private let shipFiredBullet = "shipFiredBullet"
     private let invaderFiredBullet = "invaderFiredBullet"
+    private let bossFiredBullet = "bossFiredBullet"
     private let bulletSize = CGSize(width:4, height:8)
     static var nextLvlSpaceInvaders = false
+    private var invaderSpeed = InvaderSpeed()
+    internal var descendInvaderSpeed = CGFloat()
+    static var lvl = 1
+    static var lvlCount = 1
+    private var dynamicAsteroidCoun = 0
+    private var bossHealth = 100
+    private var bossHealthLabel = SKLabelNode()
+    static var lifeCount = 3
+    
+    private struct InvaderSpeed{
+    
+    let speedOne = CGFloat(30)
+    let speedTwo = CGFloat(60)
+    let speedTree = CGFloat(75)
+        
+    
+    
+    
+    }
     
     private enum BulletType{
         case shipFiredBullet
         case invaderFiredBullet
+        case bossFiredBullet
         
     }
     
@@ -55,22 +75,79 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
     }
     
     override func didMove(to view: SKView) {
+        score = SpaceInvadersClass.scoreToPass
+       print(SpaceInvadersClass.lifeCount)
+        switch SpaceInvadersClass.lifeCount {
+        case 1 :
+            SpaceInvadersClass.shipLiveCount.append(childNode(withName: "life1") as! SKSpriteNode)
+            childNode(withName: "life2")?.isHidden = true
+            childNode(withName: "life3")?.isHidden = true
+            
+        case 2 :
+            SpaceInvadersClass.shipLiveCount.append(childNode(withName: "life1") as! SKSpriteNode)
+            SpaceInvadersClass.shipLiveCount.append(childNode(withName: "life2") as! SKSpriteNode)
+            childNode(withName: "life3")?.isHidden = true
+        case 3 :
+            SpaceInvadersClass.shipLiveCount.append(childNode(withName: "life1") as! SKSpriteNode)
+            SpaceInvadersClass.shipLiveCount.append(childNode(withName: "life2") as! SKSpriteNode)
+            SpaceInvadersClass.shipLiveCount.append(childNode(withName: "life3") as! SKSpriteNode)
+
+
+            
+            
+            
+        default:
+            break
+        }
+
         
+        switch SpaceInvadersClass.lvl {
+        case 1 :
+            descendInvaderSpeed = invaderSpeed.speedOne
+        case 2 :
+            descendInvaderSpeed = invaderSpeed.speedTwo
+        case 3 :
+            descendInvaderSpeed = invaderSpeed.speedTree
+        case 4 :
+            enumerateChildNodes(withName: "invaders"){
+                node, stop in
+                node.removeFromParent()
+            }
+            addChild(bossHealthLabel)
+            bossHealthLabel.fontName = "lcd phone"
+            bossHealthLabel.fontColor = UIColor(red: 0, green: 238, blue: 11, alpha: 1)
+            bossHealthLabel.position = CGPoint(x: 0, y: 0)
+            
+            descendInvaderSpeed = invaderSpeed.speedTwo
+            self.addChild(self.bossInvader(position: CGPoint(x: 0, y: 400)))
+            
+            
+        case 5 :
+            SpaceInvadersClass.lvl = 1
+            descendInvaderSpeed = invaderSpeed.speedOne
+            SpaceInvadersClass.nextLvlSpaceInvaders = true
+        default:
+            break
+            
+        
+        
+        }
+       
        
         if SpaceInvadersClass.nextLvlSpaceInvaders{
+
             score = SpaceInvadersClass.scoreToPass
-        for i in 0..<3{
+        for i in 0..<SpaceInvadersClass.lifeCount{
        addChild(asteroidCreator(position: asteroidPositionArray[i]))
+                        }
             
-            }
         }
         
         
-        
-        shipLiveCount = [childNode(withName: "life1") as! SKSpriteNode,
+        /*SpaceInvadersClass.shipLiveCount = [childNode(withName: "life1") as! SKSpriteNode,
                         childNode(withName: "life2") as! SKSpriteNode,
                         childNode(withName: "life3") as! SKSpriteNode
-                        ]
+                        ]*/
         initialization()
         self.physicsWorld.contactDelegate = self
         if let musicURL = Bundle.main.url(forResource: "01 A Night Of Dizzy Spells", withExtension: "mp3") {
@@ -81,6 +158,69 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
 
         
     }
+    
+    private func bossInvader(position: CGPoint) -> SKSpriteNode{
+        
+        
+        let bossInvader = SKSpriteNode()
+        let texture = SKTexture(imageNamed: String(format: "ivaderBoss.png"))
+       
+        let asteroidCategoryMask : UInt32 = 0x1 << 1
+        let asteroidCollisionMask : UInt32 = 0x1 << 2
+        let asteroidContactMask : UInt32 = 0x1 << 2
+        
+        bossInvader.size = CGSize(width: 200, height: 110)
+        bossInvader.name = "bossIvader"
+        bossInvader.position = position
+        bossInvader.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        bossInvader.color = UIColor.gray
+        bossInvader.texture = texture
+       
+        bossInvader.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 200, height: 110))
+        bossInvader.physicsBody?.isDynamic = true
+        bossInvader.physicsBody?.affectedByGravity = false
+        bossInvader.physicsBody?.affectedByGravity = false
+        bossInvader.physicsBody?.categoryBitMask = asteroidCategoryMask
+        bossInvader.physicsBody?.collisionBitMask = asteroidCollisionMask
+        bossInvader.physicsBody?.contactTestBitMask = asteroidContactMask
+       
+        
+        
+        return bossInvader
+
+
+    
+    
+    
+    
+    }
+    
+    private func dynamicAsteroidCreator(position: CGPoint) -> SKSpriteNode{
+    
+        let dynamicAsteroid = SKSpriteNode()
+        let asteroidCategoryMask : UInt32 = 0x1 << 1
+        let asteroidCollisionMask : UInt32 = 0x1 << 2
+        let asteroidContactMask : UInt32 = 0x1 << 2
+        
+        dynamicAsteroid.size = CGSize(width: 60, height: 60)
+        dynamicAsteroid.name = "dynamicAsteroid"
+        dynamicAsteroid.position = position
+        dynamicAsteroid.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        dynamicAsteroid.color = UIColor.gray
+        dynamicAsteroid.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 60, height: 60))
+        dynamicAsteroid.physicsBody?.isDynamic = true
+        dynamicAsteroid.physicsBody?.affectedByGravity = false
+        dynamicAsteroid.physicsBody?.affectedByGravity = false
+        dynamicAsteroid.physicsBody?.categoryBitMask = asteroidCategoryMask
+        dynamicAsteroid.physicsBody?.collisionBitMask = asteroidCollisionMask
+        dynamicAsteroid.physicsBody?.contactTestBitMask = asteroidContactMask
+        dynamicAsteroid.run(SKAction.moveTo(x: 600, duration: 10))
+    
+    
+    return dynamicAsteroid
+    
+    }
+    
     
     private func asteroidCreator(position: CGPoint) -> SKSpriteNode{
     
@@ -100,6 +240,7 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
         asteroid.physicsBody?.categoryBitMask = asteroidCategoryMask
         asteroid.physicsBody?.collisionBitMask = asteroidCollisionMask
         asteroid.physicsBody?.contactTestBitMask = asteroidContactMask
+        
     
     
     
@@ -140,6 +281,18 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
             bullet.physicsBody?.categoryBitMask = invaderBulletcategoryMask
             bullet.physicsBody?.collisionBitMask = invaderBulletcollisionMask
             bullet.physicsBody?.contactTestBitMask = invaderBulletcontaktMask
+            
+        case .bossFiredBullet:
+            bullet = SKSpriteNode(color: SKColor.red, size: bulletSize)
+            bullet.name = bossFiredBullet
+            bullet.size = CGSize(width: 8, height: 16)
+            bullet.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 8, height: 16))
+            bullet.physicsBody?.isDynamic = true
+            bullet.physicsBody?.affectedByGravity = false
+            bullet.physicsBody?.categoryBitMask = invaderBulletcategoryMask
+            bullet.physicsBody?.collisionBitMask = invaderBulletcollisionMask
+            bullet.physicsBody?.contactTestBitMask = invaderBulletcontaktMask
+            
         
         }
     
@@ -189,6 +342,31 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
     
     }
     
+    private func bossFired(forUpdate: CFTimeInterval){
+        let existingBullet = childNode(withName: bossFiredBullet)
+        
+        if existingBullet == nil{
+            if let boss = childNode(withName: "bossIvader"){
+                
+                let bullet = bulletCreator(bulletType: .bossFiredBullet)
+                bullet.position = CGPoint(x: boss.position.x, y: boss.position.y)
+                
+                let bulletDestination = CGPoint(x: boss.position.x, y: -600)
+                
+                shotCount = 1
+                
+                fireBullet(bullet: bullet, destination: bulletDestination, duration: 1.0)
+                
+
+            
+            
+            }
+        
+        }
+    
+    
+    }
+    
     private func shipFired(){
            let existingBullet = childNode(withName: shipFiredBullet )
             
@@ -214,14 +392,46 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
             
         }
         
+    private func moveBoss(forUpdate currentTime: CFTimeInterval, invaderSpeed: CGFloat){
         
+        
+        if (currentTime - timeOfLastMove < timePerMove){
+            return
+        }
+        
+        
+       bossMovementControl()
+        
+        let node = childNode(withName: "bossIvader")
+            
+            switch self.invaderMovementDirection{
+            case .right :
+               node?.position = CGPoint(x:  (node?.position.x)! + 30, y:  (node?.position.y)!)
+            case . left:
+                 node?.position = CGPoint(x:  (node?.position.x)! - 30, y:  (node?.position.y)!)
+            case .downLeft, .downRight:
+                 node?.position = CGPoint(x:  (node?.position.x)!, y:  (node?.position.y)! - invaderSpeed)
+                
+            case.none:
+                break
+                
+                
+            }
+            self.timeOfLastMove = currentTime
+            
+            
+            
+        
+        
+        
+    }
         
         
     
     
 
 
-   private func moveInvader(forUpdate currentTime: CFTimeInterval){
+   private func moveInvader(forUpdate currentTime: CFTimeInterval, invaderSpeed: CGFloat){
         
         
         if (currentTime - timeOfLastMove < timePerMove){
@@ -233,13 +443,14 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
     
         enumerateChildNodes(withName: "invaders")
         {node, stop in
+            
             switch self.invaderMovementDirection{
             case .right :
                 node.position = CGPoint(x: node.position.x + 30, y: node.position.y)
             case . left:
                 node.position = CGPoint(x: node.position.x - 30, y: node.position.y)
             case .downLeft, .downRight:
-                node.position = CGPoint(x: node.position.x, y: node.position.y - 60)
+                node.position = CGPoint(x: node.position.x, y: node.position.y - invaderSpeed)
                 
             case.none:
                 break
@@ -254,20 +465,20 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
         
         
     }
-
+    
     private func invaderMovementControl(){
         
-   
+        
         let proposedMoveDirection: InvaderMoveDirection = invaderMovementDirection
         
-    
+        
         enumerateChildNodes(withName: "invaders")
         { node, stop in
             
             switch proposedMoveDirection{
             case.right:
                 if (node.position.x >= CGFloat(320)) {
-             
+                    
                     self.invaderMovementDirection = .downLeft
                     
                     stop.pointee = true
@@ -280,15 +491,56 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
                     self.invaderMovementDirection = .downRight
                     
                     stop.pointee = true
-
-            
-            }
+                    
+                    
+                }
             case.downLeft:
                 self.invaderMovementDirection = .left
                 stop.pointee = true
             case.downRight:
                 self.invaderMovementDirection = .right
                 stop.pointee = true
+                
+            default:
+                break
+                
+                
+                
+                
+            }
+            
+        }
+    }
+
+
+    private func bossMovementControl(){
+        
+   
+        let proposedMoveDirection: InvaderMoveDirection = invaderMovementDirection
+        
+    
+        let node = childNode(withName: "bossIvader")
+            
+            switch proposedMoveDirection{
+            case.right:
+                if ((node?.position.x)! >= CGFloat(250)) {
+             
+                    self.invaderMovementDirection = .downLeft
+                    
+                    
+                }
+            case.left:
+                if ((node?.position.x)! <= CGFloat(-250)){
+                    
+                    
+                    self.invaderMovementDirection = .downRight
+                    
+            }
+            case.downLeft:
+                self.invaderMovementDirection = .left
+            case.downRight:
+                self.invaderMovementDirection = .right
+                
             
             default:
                 break
@@ -296,7 +548,7 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
         
         
         
-        }
+        
     
     }
     }
@@ -319,6 +571,7 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
                     unPauseLabel.isHidden = false
                     
                 case "EndGame":
+                    SpaceInvadersClass.lifeCount = 3
                     SpaceInvadersClass.scoreToPass = score
                     gameId.set(2, forKey: "ID")
                     
@@ -384,7 +637,6 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
         unPauseLabel.isHidden = true
         scoreLabel = childNode(withName: "score") as! SKLabelNode
         ship = childNode(withName: "ship") as! Player
-        enemy = childNode(withName: "invaders") as! Enemy
         unPauseLabel = childNode(withName: "unpause") as! SKLabelNode
         pauseLabel = childNode(withName: "Pause") as! SKLabelNode
         
@@ -405,13 +657,13 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
             invadersCount -= 1
         
         }
-        if nodeNames.contains(invaderFiredBullet) && nodeNames.contains("ship"){
+        if nodeNames.contains(invaderFiredBullet) && nodeNames.contains("ship") || nodeNames.contains(bossFiredBullet) && nodeNames.contains("ship"){
             self.run(SKAction.playSoundFileNamed("explosion.wav", waitForCompletion: false))
            
-            let shipToDelete = shipLiveCount.removeLast()
-            
+            let shipToDelete = SpaceInvadersClass.shipLiveCount.removeLast()
+            SpaceInvadersClass.lifeCount -= 1
             shipToDelete.removeFromParent()
-            
+            print(SpaceInvadersClass.shipLiveCount)
             
         
         }
@@ -419,12 +671,24 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
         if nodeNames.contains(shipFiredBullet) && nodeNames.contains("asteroid"){
             
          contact.bodyB.node!.removeFromParent()
-        //contact.bodyA.node!.removeFromParent()
+        
         
         
         }
+        if nodeNames.contains(shipFiredBullet) && nodeNames.contains("dynamicAsteroid"){
+            
+            contact.bodyB.node!.removeFromParent()
         
-        
+        }
+        if  nodeNames.contains(shipFiredBullet) && nodeNames.contains("bossIvader"){
+            contact.bodyB.node!.removeFromParent()
+           
+            score += 10
+            bossHealth -= 5
+            shotCount = 1
+            
+            
+        }
             }
     
     
@@ -440,12 +704,12 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
         gameId.set(2, forKey: "ID")
         let lowLvl = CGFloat(-400)
     
-        if shipLiveCount.count == 0 {
-     
+        if SpaceInvadersClass.lifeCount == 0{//SpaceInvadersClass.shipLiveCount.count == 0 {
+            SpaceInvadersClass.lvl = 1
         ship.removeFromParent()
 
     
-            
+            SpaceInvadersClass.lifeCount = 3
             if let view = self.view {
                 // Load the SKScene from 'GameScene.sks'
                  if let scene = BlockBreakerGameOver(fileNamed: "BlockBreakerGameOver") {
@@ -462,8 +726,10 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
        
         }
         
-        if invadersCount == 0{
-            SpaceInvadersClass.nextLvlSpaceInvaders = true
+        if invadersCount == 0 || bossHealth == 0{
+            //SpaceInvadersClass.nextLvlSpaceInvaders = true
+            SpaceInvadersClass.lvl += 1
+            SpaceInvadersClass.lvlCount += 1
             if let view = self.view {
                 // Load the SKScene from 'GameScene.sks'
                 if let scene = NextLvlClass(fileNamed: "NextLvlScene") {
@@ -477,7 +743,7 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
                 
             }
 
-            
+          
             
             
             
@@ -516,19 +782,57 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
     
     override func update(_ currentTime: TimeInterval) {
         scoreLabel.text = "SCORE: \(score)"
+        
+        if SpaceInvadersClass.lvl != 4{
         self.invaderFired(forUpdate: currentTime)
-        self.moveInvader(forUpdate: currentTime)
-        self.endGame()
+        self.moveInvader(forUpdate: currentTime, invaderSpeed: descendInvaderSpeed)
+            if shotCount == 0{
+                
+                
+                self.shipFired()
+                
+                
+            }
+            self.endGame()
+        }else {
+            bossHealthLabel.text = "Boss Health : \(bossHealth)"
+        self.bossFired(forUpdate: currentTime)
+        self.moveBoss(forUpdate: currentTime, invaderSpeed: descendInvaderSpeed)
+        
+    if shotCount == 0{
+                
+                
+                self.shipFired()
+                
+                
+    }
+            self.endGame()
         
         
-        if shotCount == 0{
-           self.shipFired()
-
-            
         }
-      
         
+        
+        
+        if SpaceInvadersClass.lvlCount == 9 && dynamicAsteroidCoun == 0{
             
+            
+           
+        
+       addChild(dynamicAsteroidCreator(position: CGPoint(x: -360, y: -350)))
+        dynamicAsteroidCoun += 1
+        }
+        if  childNode(withName: "dynamicAsteroid") != nil{
+            
+           
+        
+            if (childNode(withName: "dynamicAsteroid")?.position.x)! > CGFloat(330){
+            childNode(withName: "dynamicAsteroid")?.removeFromParent()
+                dynamicAsteroidCoun = 0
+            }
+        }
+        
+     
+        
         
         }
          

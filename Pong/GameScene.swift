@@ -24,12 +24,16 @@ class GameScene: SKScene {
     var offsetY = CGFloat(0)
     var xSpeed = CGFloat(0)
     var ySpeed = CGFloat(0)
-    
-  
+    private var pauseLabel = SKLabelNode()
+    private var unpauseLabele = SKLabelNode()
+    private var foodTexturesArray = [SKTexture]()
+    private var scoreLabel = SKLabelNode()
+    private var gameId = UserDefaults.standard
     private var foodCount = 0
     private var snake = [SKSpriteNode]()
-private var lastUpdateTime: CFTimeInterval = 0
-    
+    private var lastUpdateTime: CFTimeInterval = 0
+    private var score = 0
+    private var snakeScore = UserDefaults.standard
     private var timeSinceLastMove: CFTimeInterval  = 0  // Seconds since the last move
     private enum SnakeDirection{
         
@@ -45,7 +49,21 @@ private var lastUpdateTime: CFTimeInterval = 0
     
     
     override func didMove(to view: SKView) {
-       
+        
+        if self.snakeScore.value(forKey: "Snake") == nil{
+            snakeScore.set(score, forKey: "Snake")
+            
+        }
+        
+        
+        foodTexturesArray = [SKTexture(imageNamed: String(format: "apple.png")),
+                             SKTexture(imageNamed: String(format: "cherry.png")),
+                             SKTexture(imageNamed: String(format: "orange.png")),
+                             SKTexture(imageNamed: String(format: "strawbery.png"))
+                            ]
+        scoreLabel = (childNode(withName: "Score") as? SKLabelNode)!
+        pauseLabel = (childNode(withName: "Pause") as? SKLabelNode)!
+        unpauseLabele = (childNode(withName: "Unpause") as? SKLabelNode)!
         left = (childNode(withName: "Left") as? SKSpriteNode)!
         right = (childNode(withName: "Right") as? SKSpriteNode)!
         down = (childNode(withName: "Down") as? SKSpriteNode)!
@@ -99,6 +117,7 @@ private var lastUpdateTime: CFTimeInterval = 0
                     rotation = CGFloat(M_PI) * 2
                     
                     childNode(withName: "Up")?.isHidden = true
+                    
                     childNode(withName: "Right")?.isHidden = false
                     childNode(withName: "Left")?.isHidden = false
                 case "Up":
@@ -111,6 +130,36 @@ private var lastUpdateTime: CFTimeInterval = 0
                     childNode(withName: "Down")?.isHidden = true
                     childNode(withName: "Right")?.isHidden = false
                     childNode(withName: "Left")?.isHidden = false
+                    
+                case "Pause" :
+                    self.scene?.isPaused = true
+                    self.physicsWorld.speed = 0
+                    pauseLabel.isHidden = true
+                    unpauseLabele.isHidden = false
+                
+                case "Unpause" :
+                    self.scene?.isPaused = false
+                    self.physicsWorld.speed = 0
+                    pauseLabel.isHidden = false
+                    unpauseLabele.isHidden = true
+                    
+                    
+                case "EndGame" :
+                    
+                    self.gameId.set(3, forKey: "ID")
+                    if let view = self.view {
+                        // Load the SKScene from 'GameScene.sks'
+                        if let scene = BlockBreakerGameOver(fileNamed: "BlockBreakerGameOver") {
+                            // Set the scale mode to scale to fit the window
+                            scene.scaleMode = .aspectFill
+                            
+                            // Present the scene
+                            view.presentScene(scene,transition: SKTransition.flipHorizontal(withDuration: TimeInterval(1.5)))
+                        }
+                        
+                        
+                    }
+
                     
                     
                 default:
@@ -140,6 +189,8 @@ private var lastUpdateTime: CFTimeInterval = 0
     }
     
     private func createSnakeHead()-> SKSpriteNode{
+        
+        
         let texture = SKTexture(imageNamed: String(format: "Image-1.png"))
         let scale = CGSize(width: 80, height: 80)
         let snakeHead = SKSpriteNode()
@@ -152,7 +203,7 @@ private var lastUpdateTime: CFTimeInterval = 0
         snakeHead.zPosition = 0
         snakeHead.texture = texture
         snakeHead.scale(to: scale)
-        snakeHead.zRotation = CGFloat(M_PI)
+        //snakeHead.zRotation = CGFloat(M_PI)
         
         
         self.addChild(snakeHead)
@@ -167,10 +218,10 @@ private var lastUpdateTime: CFTimeInterval = 0
    
     private func snakeTransition(snakeHead: SKNode){
         
-        let maxX = CGFloat(worldSizeWidth / 2)//self.frame.size.width / 2
-        let minX = CGFloat(worldSizeWidth / -2)//self.frame.size.width / -2
-        let maxY = CGFloat(worldSizeHeight / 2 + 167)//self.frame.size.height / 2
-        let minY = CGFloat(worldSizeHeight / -2 + 185)//self.frame.size.height / -2
+        let maxX = CGFloat(worldSizeWidth / 2)
+        let minX = CGFloat(worldSizeWidth / -2)
+        let maxY = CGFloat(worldSizeHeight / 2 + 167 )
+        let minY = CGFloat(self.frame.size.height / -2 + 320)
         
         if snakeHead.position.x > maxX{
             snakeHead.position.x = minX
@@ -224,18 +275,20 @@ private var lastUpdateTime: CFTimeInterval = 0
         let  positionX = randomNumberGenerator(start: Int(minX) , end: Int(maxX))
         let  positionY = randomNumberGenerator(start: Int(minY) , end: Int(maxY))
         
+        let randomIndex = Int(arc4random_uniform(UInt32(4)))
+        let texture = foodTexturesArray[randomIndex]
 
         let food = SKSpriteNode()
         food.size.height = 40
         food.size.width = 40
         food.position = CGPoint(x: positionX * 40, y: positionY * 40)
         food.name = "Food"
+        food.texture = texture
         food.color = UIColor.green
         food.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         food.zPosition = 0
         
-       print(food.position)
-        
+               
         
         
         
@@ -267,7 +320,7 @@ private var lastUpdateTime: CFTimeInterval = 0
         body.texture = texture
         body.scale(to: scale)
         addChild(body)
-        
+        score += 10
         return body
         
         
@@ -328,9 +381,14 @@ private var lastUpdateTime: CFTimeInterval = 0
         {node,_ in
             
             if node.position == self.snake[0].position{
+                self.gameId.set(3, forKey: "ID")
+                if self.snakeScore.integer(forKey: "Snake") < self.score{
+                self.snakeScore.set(self.score, forKey: "Snake")
+                
+                }
                 if let view = self.view {
                     // Load the SKScene from 'GameScene.sks'
-                    if let scene = GameOverClass(fileNamed: "GameOverSnake") {
+                    if let scene = BlockBreakerGameOver(fileNamed: "BlockBreakerGameOver") {
                         // Set the scale mode to scale to fit the window
                         scene.scaleMode = .aspectFill
                         
@@ -363,6 +421,7 @@ private var lastUpdateTime: CFTimeInterval = 0
 
     
     override func update(_ currentTime: TimeInterval) {
+        scoreLabel.text = "SCORE: \(score) "
         var timeSinceLastUpdate = currentTime - lastUpdateTime
        
         lastUpdateTime = currentTime
