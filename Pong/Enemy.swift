@@ -18,7 +18,7 @@ class Enemy: SKSpriteNode {
         
         
         
-        enemy.run(SKAction.moveTo(x: ballPosition.position.x, duration: 0.30
+        enemy.run(SKAction.moveTo(x: ballPosition.position.x, duration: 0.32
         ))
        
 

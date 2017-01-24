@@ -138,7 +138,7 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
         if SpaceInvadersClass.nextLvlSpaceInvaders{
 
             
-        for i in 0..<SpaceInvadersClass.lifeCount{
+        for i in 0..<2{
        addChild(asteroidCreator(position: asteroidPositionArray[i]))
                         }
             
