@@ -11,6 +11,7 @@ import SpriteKit
 class BlockBreaker: SKScene, SKPhysicsContactDelegate{
     
     var backgroundMusic: SKAudioNode!
+    private var soundStatus = UserDefaults.standard
     private var highScore = UserDefaults.standard
     private var playerPadle = Player()
     private var ball = Ball()
@@ -54,10 +55,11 @@ class BlockBreaker: SKScene, SKPhysicsContactDelegate{
        
         ball.ballMove(ball: ball,  speedX: BlockBreaker.speedX , speedY: BlockBreaker.speedY)
         
+        if soundStatus.bool(forKey: "SOUNDSTATUS"){
         if let musicURL = Bundle.main.url(forResource: "03 Chibi Ninja", withExtension: "mp3") {
             backgroundMusic = SKAudioNode(url: musicURL)
             addChild(backgroundMusic)
-            
+            }
             if BlockBreaker.nextLvlInit {
                 let cislo = Int(randomNumber.randomNumberGenerator(start: 1, end: 5))
                 
@@ -207,7 +209,7 @@ class BlockBreaker: SKScene, SKPhysicsContactDelegate{
             highScore.set(score, forKey: "highScore")
             
             }
-           
+           BlockBreaker.nextLvlInit = false
             if let view = self.view {
                 // Load the SKScene from 'GameOverScene'
                 if let scene = BlockBreakerGameOver(fileNamed: "BlockBreakerGameOver") {

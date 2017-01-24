@@ -46,6 +46,7 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
     private var bossHealth = 100
     private var bossHealthLabel = SKLabelNode()
     static var lifeCount = 3
+    private var soundStatus = UserDefaults.standard
     
     private struct InvaderSpeed{
     
@@ -76,7 +77,7 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
     
     override func didMove(to view: SKView) {
         
-       print(SpaceInvadersClass.lifeCount)
+       score = SpaceInvadersClass.scoreToPass
         switch SpaceInvadersClass.lifeCount {
         case 1 :
             SpaceInvadersClass.shipLiveCount.append(childNode(withName: "life1") as! SKSpriteNode)
@@ -136,7 +137,7 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
        
         if SpaceInvadersClass.nextLvlSpaceInvaders{
 
-            score = SpaceInvadersClass.scoreToPass
+            
         for i in 0..<SpaceInvadersClass.lifeCount{
        addChild(asteroidCreator(position: asteroidPositionArray[i]))
                         }
@@ -144,15 +145,15 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
         }
         
         
-        /*SpaceInvadersClass.shipLiveCount = [childNode(withName: "life1") as! SKSpriteNode,
-                        childNode(withName: "life2") as! SKSpriteNode,
-                        childNode(withName: "life3") as! SKSpriteNode
-                        ]*/
+        
         initialization()
         self.physicsWorld.contactDelegate = self
+        
+        if soundStatus.bool(forKey: "SOUNDSTATUS"){
         if let musicURL = Bundle.main.url(forResource: "01 A Night Of Dizzy Spells", withExtension: "mp3") {
             backgroundMusic = SKAudioNode(url: musicURL)
             addChild(backgroundMusic)
+        }
         }
 
 
@@ -382,8 +383,9 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
                     shotCount = 1
                     
                     fireBullet(bullet: bullet, destination: bulletDestination, duration: 1.0)
+                    if soundStatus.bool(forKey: "SOUNDSTATUS"){
                    self.run(SKAction.playSoundFileNamed("shoot.wav", waitForCompletion: false))
-                
+                    }
                 }
                 
             }
@@ -651,15 +653,18 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
         if  nodeNames.contains(shipFiredBullet) && nodeNames.contains("invaders"){
          contact.bodyA.node!.removeFromParent()
          contact.bodyB.node!.removeFromParent()
+            if soundStatus.bool(forKey: "SOUNDSTATUS"){
             self.run(SKAction.playSoundFileNamed("invaderkilled.wav", waitForCompletion: false))
+            }
             score += 5
             shotCount = 1
             invadersCount -= 1
         
         }
         if nodeNames.contains(invaderFiredBullet) && nodeNames.contains("ship") || nodeNames.contains(bossFiredBullet) && nodeNames.contains("ship"){
+            if soundStatus.bool(forKey: "SOUNDSTATUS"){
             self.run(SKAction.playSoundFileNamed("explosion.wav", waitForCompletion: false))
-           
+            }
             let shipToDelete = SpaceInvadersClass.shipLiveCount.removeLast()
             SpaceInvadersClass.lifeCount -= 1
             shipToDelete.removeFromParent()
@@ -727,7 +732,8 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
         }
         
         if invadersCount == 0 || bossHealth == 0{
-            //SpaceInvadersClass.nextLvlSpaceInvaders = true
+            gameId.set(2, forKey: "ID")
+             SpaceInvadersClass.scoreToPass = score
             SpaceInvadersClass.lvl += 1
             SpaceInvadersClass.lvlCount += 1
             if let view = self.view {
@@ -781,6 +787,7 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
     
     
     override func update(_ currentTime: TimeInterval) {
+        self.endGame()
         scoreLabel.text = "SCORE: \(score)"
         
         if SpaceInvadersClass.lvl != 4{
@@ -793,7 +800,7 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
                 
                 
             }
-            self.endGame()
+            
         }else {
             bossHealthLabel.text = "Boss Health : \(bossHealth)"
         self.bossFired(forUpdate: currentTime)
@@ -806,7 +813,7 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
                 
                 
     }
-            self.endGame()
+            
         
         
         }

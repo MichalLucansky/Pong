@@ -10,7 +10,8 @@ import SpriteKit
 
 
 class BlockBreakerGameOver: SKScene {
-    
+    var backgroundMusic: SKAudioNode!
+    private var soundStatus = UserDefaults.standard
     private var highScore = UserDefaults.standard
     private var highScoreLabel = SKLabelNode()
     private var playAgainLabel = SKLabelNode()
@@ -20,6 +21,12 @@ class BlockBreakerGameOver: SKScene {
     private var gameId = UserDefaults.standard
     
     override func didMove(to view: SKView) {
+        if soundStatus.bool(forKey: "SOUNDSTATUS"){
+        if let musicURL = Bundle.main.url(forResource: "08 Ascending", withExtension: "mp3") {
+            backgroundMusic = SKAudioNode(url: musicURL)
+            addChild(backgroundMusic)
+            }
+        }
        
         
         let id = gameId.integer(forKey: "ID")

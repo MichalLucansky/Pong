@@ -35,6 +35,9 @@ class GameScene: SKScene {
     private var score = 0
     private var snakeScore = UserDefaults.standard
     private var timeSinceLastMove: CFTimeInterval  = 0  // Seconds since the last move
+    var backgroundMusic: SKAudioNode!
+    private var soundStatus = UserDefaults.standard
+    
     private enum SnakeDirection{
         
         case left
@@ -49,6 +52,14 @@ class GameScene: SKScene {
     
     
     override func didMove(to view: SKView) {
+        if soundStatus.bool(forKey: "SOUNDSTATUS"){
+            if let musicURL = Bundle.main.url(forResource: "02 HHavok-main", withExtension: "mp3") {
+                backgroundMusic = SKAudioNode(url: musicURL)
+                addChild(backgroundMusic)
+                
+                
+            }
+        }
         
         if self.snakeScore.value(forKey: "Snake") == nil{
             snakeScore.set(score, forKey: "Snake")
@@ -203,7 +214,7 @@ class GameScene: SKScene {
         snakeHead.zPosition = 0
         snakeHead.texture = texture
         snakeHead.scale(to: scale)
-        //snakeHead.zRotation = CGFloat(M_PI)
+        
         
         
         self.addChild(snakeHead)

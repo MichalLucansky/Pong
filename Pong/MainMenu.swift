@@ -15,14 +15,19 @@ class MainMenu: SKScene{
     private var spaceInvaders = SKLabelNode()
     private var snake = SKLabelNode()
     private var ticTacToe = SKLabelNode()
-    
+    private var soundStatus = UserDefaults.standard
     
     
     override func didMove(to view: SKView) {
         initialization()
+        
+        if soundStatus.bool(forKey: "SOUNDSTATUS"){
                 if let musicURL = Bundle.main.url(forResource: "10 Arpanauts", withExtension: "mp3") {
             backgroundMusic = SKAudioNode(url: musicURL)
             addChild(backgroundMusic)
+                
+        
+        }
         }
         
     }
@@ -92,6 +97,16 @@ class MainMenu: SKScene{
                         
                         
                     }
+                case "Settings" :
+                    if let view = self.view {
+                        if let scene = Settings(fileNamed: "Settings") {
+                            scene.scaleMode = .aspectFill
+                            view.presentScene(scene,transition: SKTransition.flipHorizontal(withDuration: TimeInterval(1.5)))
+                        }
+                        
+                        
+                    }
+                    
                     
                     
 

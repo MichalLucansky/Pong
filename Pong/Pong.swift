@@ -11,6 +11,7 @@ import GameplayKit
 
 class Pong: SKScene {
     var backgroundMusic: SKAudioNode!
+    private var soundStatus = UserDefaults.standard
     private var player = Player()
     private var secondPlayer = Enemy()
     private var enemy = Enemy()
@@ -32,10 +33,13 @@ class Pong: SKScene {
         
         initialization()
         ball.ballMove(ball: ball, speedX: -15, speedY: 15)
+        
+        if soundStatus.bool(forKey: "SOUNDSTATUS"){
         if let musicURL = Bundle.main.url(forResource: "02 HHavok-main", withExtension: "mp3") {
             backgroundMusic = SKAudioNode(url: musicURL)
             addChild(backgroundMusic)
            
+        }
         }
 
     }
