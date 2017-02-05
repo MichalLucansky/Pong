@@ -715,6 +715,7 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
         if SpaceInvadersClass.lifeCount == 0{
             SpaceInvadersClass.lvlCount = 1
             SpaceInvadersClass.lvl = 1
+            SpaceInvadersClass.nextLvlSpaceInvaders = false
         ship.removeFromParent()
 
     
@@ -831,7 +832,7 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
             
            
         
-       addChild(dynamicAsteroidCreator(position: CGPoint(x: -360, y: -350)))
+       addChild(dynamicAsteroidCreator(position: CGPoint(x: -360, y: -300)))
         dynamicAsteroidCoun += 1
         }
         if  childNode(withName: "dynamicAsteroid") != nil{
