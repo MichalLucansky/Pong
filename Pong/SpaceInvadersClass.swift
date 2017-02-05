@@ -9,63 +9,68 @@
 import SpriteKit
 
 class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
-    var backgroundMusic: SKAudioNode!
+    
+    // NOTE: Nodes in the scene
+   
+    private var backgroundMusic: SKAudioNode!
     private var shipLiveLabel = SKLabelNode()
     private var scoreLabel = SKLabelNode()
+    private var bossHealthLabel = SKLabelNode()
+    private var pauseLabel = SKLabelNode()
+    private var unPauseLabel = SKLabelNode()
     private var life1 = SKSpriteNode()
     private var life2 = SKSpriteNode()
     private var life3 = SKSpriteNode()
-    private var pauseLabel = SKLabelNode()
-    private var unPauseLabel = SKLabelNode()
-    private var bossInvadeLife = 100
+    //NOTE: variables
+    private var dynamicAsteroidCoun = 0
+    private var bossHealth = 100
+    private var invadersCount = 24
+    private var shotCount = 1
+    private var score = 0
+    static var lifeCount = 3
+    //NOTE: ship, shot
     private var ship = Player()
     private var shot = Player()
-    private var invadersCount = 24
+    // NOTE: asteroid vars
     static var shipLiveCount = [SKSpriteNode]()
-    private var shotCount = 1
-    private let maxX = CGFloat(339)
-    private let minX = CGFloat(-349)
-    private var score = 0
+    private var  asteroidPositionArray = [CGPoint(x: -180, y: -400), CGPoint(x: 0, y: -400), CGPoint(x: 180, y: -400)]
+    // NOTE: data to pass or save
+    private var soundStatus = UserDefaults.standard
     static var scoreToPass = Int()
-    private var timeOfLastMove : CFTimeInterval = 0.0
-    private var timePerMove : CFTimeInterval = 0.8
-    private var invaderMovementDirection: InvaderMoveDirection = .right
     private var gameId = UserDefaults.standard
     private var spaceInvadersScore = UserDefaults.standard
-    private var  asteroidPositionArray = [CGPoint(x: -180, y: -400), CGPoint(x: 0, y: -400), CGPoint(x: 180, y: -400)]
+    //NOTE: invader move controll settings
+    private var timeOfLastMove : CFTimeInterval = 0.0
+    private var timePerMove : CFTimeInterval = 0.8
+    internal var descendInvaderSpeed = CGFloat()
+    private var invaderSpeed = InvaderSpeed()
+    private var invaderMovementDirection: InvaderMoveDirection = .right
+    //NOTE: names
     private let shipFiredBullet = "shipFiredBullet"
     private let invaderFiredBullet = "invaderFiredBullet"
     private let bossFiredBullet = "bossFiredBullet"
     private let bulletSize = CGSize(width:4, height:8)
+    //NOTE: LVL settings
     static var nextLvlSpaceInvaders = false
-    private var invaderSpeed = InvaderSpeed()
-    internal var descendInvaderSpeed = CGFloat()
     static var lvl = 1
     static var lvlCount = 1
-    private var dynamicAsteroidCoun = 0
-    private var bossHealth = 100
-    private var bossHealthLabel = SKLabelNode()
-    static var lifeCount = 3
-    private var soundStatus = UserDefaults.standard
-    
+    // NOTE: Invader speed settings
     private struct InvaderSpeed{
     
     let speedOne = CGFloat(30)
     let speedTwo = CGFloat(60)
     let speedTree = CGFloat(75)
         
-    
-    
-    
     }
-    
+    //Bullet types
     private enum BulletType{
+        
         case shipFiredBullet
         case invaderFiredBullet
         case bossFiredBullet
         
     }
-    
+    // possible move directions
     private enum InvaderMoveDirection {
         case left
         case right
@@ -77,13 +82,14 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
     
     override func didMove(to view: SKView) {
         
-       score = SpaceInvadersClass.scoreToPass
+       score = SpaceInvadersClass.scoreToPass // loading score from previous lvl
+        
+        //managing nodes view in scene
         switch SpaceInvadersClass.lifeCount {
         case 1 :
             SpaceInvadersClass.shipLiveCount.append(childNode(withName: "life1") as! SKSpriteNode)
             childNode(withName: "life2")?.isHidden = true
             childNode(withName: "life3")?.isHidden = true
-            
         case 2 :
             SpaceInvadersClass.shipLiveCount.append(childNode(withName: "life1") as! SKSpriteNode)
             SpaceInvadersClass.shipLiveCount.append(childNode(withName: "life2") as! SKSpriteNode)
@@ -92,16 +98,11 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
             SpaceInvadersClass.shipLiveCount.append(childNode(withName: "life1") as! SKSpriteNode)
             SpaceInvadersClass.shipLiveCount.append(childNode(withName: "life2") as! SKSpriteNode)
             SpaceInvadersClass.shipLiveCount.append(childNode(withName: "life3") as! SKSpriteNode)
-
-
-            
-            
-            
         default:
             break
         }
 
-        
+        //setting invader speed, depending on lvl
         switch SpaceInvadersClass.lvl {
         case 1 :
             descendInvaderSpeed = invaderSpeed.speedOne
@@ -109,7 +110,7 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
             descendInvaderSpeed = invaderSpeed.speedTwo
         case 3 :
             descendInvaderSpeed = invaderSpeed.speedTree
-        case 4 :
+        case 4 ://Boss level
             enumerateChildNodes(withName: "invaders"){
                 node, stop in
                 node.removeFromParent()
@@ -121,8 +122,6 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
             
             descendInvaderSpeed = invaderSpeed.speedTwo
             self.addChild(self.bossInvader(position: CGPoint(x: 0, y: 400)))
-            
-            
         case 5 :
             SpaceInvadersClass.lvl = 1
             descendInvaderSpeed = invaderSpeed.speedOne
@@ -134,12 +133,11 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
         
         }
        
-       
+       // creating asteroids if needed
         if SpaceInvadersClass.nextLvlSpaceInvaders{
 
-            
-        for i in 0..<2{
-       addChild(asteroidCreator(position: asteroidPositionArray[i]))
+        for i in 0..<3{
+        addChild(asteroidCreator(position: asteroidPositionArray[i]))
                         }
             
         }
@@ -148,7 +146,7 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
         
         initialization()
         self.physicsWorld.contactDelegate = self
-        
+        // BG music
         if soundStatus.bool(forKey: "SOUNDSTATUS"){
         if let musicURL = Bundle.main.url(forResource: "01 A Night Of Dizzy Spells", withExtension: "mp3") {
             backgroundMusic = SKAudioNode(url: musicURL)
@@ -160,6 +158,7 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
         
     }
     
+    //NOTE: Boss invaders creator
     private func bossInvader(position: CGPoint) -> SKSpriteNode{
         
         
@@ -573,6 +572,8 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
                     unPauseLabel.isHidden = false
                     
                 case "EndGame":
+                    SpaceInvadersClass.lvl = 1
+                    SpaceInvadersClass.lvlCount = 1
                     SpaceInvadersClass.lifeCount = 3
                     SpaceInvadersClass.scoreToPass = score
                     gameId.set(2, forKey: "ID")
@@ -675,7 +676,9 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
         
         if nodeNames.contains(shipFiredBullet) && nodeNames.contains("asteroid"){
             
-         contact.bodyB.node!.removeFromParent()
+          contact.bodyB.node?.removeFromParent()
+           
+            
         
         
         
@@ -709,7 +712,8 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
         gameId.set(2, forKey: "ID")
         let lowLvl = CGFloat(-400)
     
-        if SpaceInvadersClass.lifeCount == 0{//SpaceInvadersClass.shipLiveCount.count == 0 {
+        if SpaceInvadersClass.lifeCount == 0{
+            SpaceInvadersClass.lvlCount = 1
             SpaceInvadersClass.lvl = 1
         ship.removeFromParent()
 
@@ -787,6 +791,8 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
     
     
     override func update(_ currentTime: TimeInterval) {
+        
+        
         self.endGame()
         scoreLabel.text = "SCORE: \(score)"
         

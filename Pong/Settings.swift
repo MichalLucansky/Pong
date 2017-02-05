@@ -10,7 +10,7 @@ import SpriteKit
 
 
 class Settings: SKScene{
-    private var backgroundMusic: SKAudioNode!
+    private var backgroundMusic: SKAudioNode?
     private var on = SKLabelNode()
     private var off = SKLabelNode()
     private var resset = SKLabelNode()
@@ -52,7 +52,7 @@ class Settings: SKScene{
             if let musicURL = Bundle.main.url(forResource: "10 Arpanauts", withExtension: "mp3") {
                 backgroundMusic = SKAudioNode(url: musicURL)
                 
-                addChild(backgroundMusic)
+                addChild(backgroundMusic!)
                 
                 
             }
@@ -81,7 +81,7 @@ class Settings: SKScene{
     
     private func soundsOff(){
         
-    
+        
         soundStatus.set(false, forKey: "SOUNDSTATUS")
         
         onOffLabelStatus.0.set(true, forKey: "onLabelStatus")
@@ -116,9 +116,12 @@ class Settings: SKScene{
             
             switch possitionName {
             case "ON" :
+                self.backgroundMusic?.run(SKAction.changeVolume(by: -50, duration: 0.0))
                 self.soundsOff()
             case "OFF" :
                 self.soundsOn()
+              self.backgroundMusic?.run(SKAction.changeVolume(by: 1, duration: 0.0))
+                
             case "Back" :
                 if let view = self.view {
                     // Load the SKScene from 'GameScene.sks'
@@ -150,6 +153,7 @@ class Settings: SKScene{
 
 
     override func update(_ currentTime: TimeInterval) {
+        
         on.isHidden = onOffLabelStatus.0.bool(forKey: "onLabelStatus")
         off.isHidden = onOffLabelStatus.1.bool(forKey: "offLabelStatus")
        

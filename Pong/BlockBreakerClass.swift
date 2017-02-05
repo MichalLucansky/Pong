@@ -34,13 +34,13 @@ class BlockBreaker: SKScene, SKPhysicsContactDelegate{
     
     
     override func didMove(to view: SKView) {
-        
+       
         
         if highScore.value(forKey: "highScore") == nil {
             highScore.set(0, forKey: "highScore")
         }
         
-                    var i = 0
+        
         
         if BlockBreaker.nextLvlInit{
             
@@ -49,29 +49,38 @@ class BlockBreaker: SKScene, SKPhysicsContactDelegate{
         BlockBreaker.speedX += 2
             BlockBreaker.speedY += -1
         
+        }else{
+            BlockBreaker.speedX = 15
+            BlockBreaker.speedY = -15
+        
         }
         
+
         initialization()
        
         ball.ballMove(ball: ball,  speedX: BlockBreaker.speedX , speedY: BlockBreaker.speedY)
+        
+        if BlockBreaker.nextLvlInit {
+            var i = 0
+            let numberOfObstacles = Int(randomNumber.randomNumberGenerator(start: 1, end: 5))
+            
+            while i != numberOfObstacles{
+                BlockBreaker.nextLvlInit = true
+                self.addChild(obstacle.staticSpriteGenerator(position: CGPoint(x: randomNumber.randomNumberGenerator(start: -360, end: 360), y: 0), width:  randomNumber.randomNumberGenerator(start: 60, end: 110)))
+                i += 1
+            }
+            
+        }
         
         if soundStatus.bool(forKey: "SOUNDSTATUS"){
         if let musicURL = Bundle.main.url(forResource: "03 Chibi Ninja", withExtension: "mp3") {
             backgroundMusic = SKAudioNode(url: musicURL)
             addChild(backgroundMusic)
             }
-            if BlockBreaker.nextLvlInit {
-                let cislo = Int(randomNumber.randomNumberGenerator(start: 1, end: 5))
-                
-                while i != cislo{
-                    BlockBreaker.nextLvlInit = true
-                self.addChild(obstacle.staticSpriteGenerator(position: CGPoint(x: randomNumber.randomNumberGenerator(start: -360, end: 360), y: 0), width:  randomNumber.randomNumberGenerator(start: 60, end: 110)))
-                    i += 1
-                }
-           
-        }
+        
 
         }
+    
     }
     
     

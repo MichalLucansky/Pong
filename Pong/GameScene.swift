@@ -12,7 +12,7 @@ import UIKit
 
 class GameScene: SKScene {
     let worldSizeHeight = 1000
-    let worldSizeWidth = 720
+    let worldSizeWidth = 800
     var rotation = CGFloat()
     var left = SKNode()
     var right = SKNode()
@@ -85,6 +85,8 @@ class GameScene: SKScene {
        
         
            }
+    
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches{
             let location = touch.location(in: self)
@@ -187,33 +189,23 @@ class GameScene: SKScene {
         }
     }
     
-    private func rowsAndCollumnNumber()-> (Int, Int){
-    
-    let rowsPozitive = Int(1000 / 40 )//Int(self.frame.height / 40)
-
-    let collumnsPozitive = Int(720 / 40) //Int(self.frame.width / 40)
-  
-   
-    
-        return (rowsPozitive, collumnsPozitive)
-    
-    }
+ 
     
     private func createSnakeHead()-> SKSpriteNode{
         
         
         let texture = SKTexture(imageNamed: String(format: "Image-1.png"))
-        let scale = CGSize(width: 80, height: 80)
+     
         let snakeHead = SKSpriteNode()
         snakeHead.size.height = 40
         snakeHead.size.width = 40
-        snakeHead.position = CGPoint(x: 0, y: 167)
+        snakeHead.position = CGPoint(x: 0, y: 0)
         snakeHead.name = "SnakeHead"
         snakeHead.color = UIColor.brown
         snakeHead.anchorPoint = CGPoint(x: 0.5, y: 0.5)
-        snakeHead.zPosition = 0
+        snakeHead.zPosition = 1
         snakeHead.texture = texture
-        snakeHead.scale(to: scale)
+        
         
         
         
@@ -229,26 +221,24 @@ class GameScene: SKScene {
    
     private func snakeTransition(snakeHead: SKNode){
         
-        let maxX = CGFloat(worldSizeWidth / 2)
-        let minX = CGFloat(worldSizeWidth / -2)
-        let maxY = CGFloat(worldSizeHeight / 2 + 167 )
-        let minY = CGFloat(self.frame.size.height / -2 + 320)
+      
         
-        if snakeHead.position.x > maxX{
-            snakeHead.position.x = minX
-        }else if snakeHead.position.x < minX{
-            snakeHead.position.x = maxX
-        }else if snakeHead.position.y > maxY{
-            snakeHead.position.y = minY
-        }else if snakeHead.position.y < minY{
-            snakeHead.position.y = maxY
+        if snakeHead.position.x == 360 && (snakeDirection == .right){
+            snakeHead.position.x = -360
+        }else if snakeHead.position.x == -360 && (snakeDirection == .left){
+            snakeHead.position.x = 360
+        }else if snakeHead.position.y == 640 && (snakeDirection == .up){
+            snakeHead.position.y = -360
+        }else if snakeHead.position.y == -360 && (snakeDirection == .down){
+            snakeHead.position.y = 640
         }
-        
-        
+       
         
         
         
     }
+    
+    
     private func snakeMove(moveX: CGFloat, moveY: CGFloat){
         
         
@@ -275,12 +265,11 @@ class GameScene: SKScene {
     private func createFood() -> SKSpriteNode{
         
         
-        let maxX = rowsAndCollumnNumber().1 / 2
-        let minX = rowsAndCollumnNumber().1 / -2
+        let maxX = 8
+        let minX = -8
 
-        let maxY = rowsAndCollumnNumber().0 / 2
-        let minY = rowsAndCollumnNumber().0 / -3
-        
+        let maxY = 15
+        let minY = -8
         
         
         let  positionX = randomNumberGenerator(start: Int(minX) , end: Int(maxX))
@@ -318,8 +307,7 @@ class GameScene: SKScene {
         
         let lastX = last.position.x + offsetX
         let lastY = last.position.y + offsetY
-        let scale = CGSize(width: 70, height: 70)
-       let body = SKSpriteNode()
+        let body = SKSpriteNode()
       
         body.size.height = 40
         body.size.width = 40
@@ -327,9 +315,9 @@ class GameScene: SKScene {
         body.name = "Body"
         body.color = UIColor.blue
         body.anchorPoint = CGPoint(x: 0.5 , y: 0.5)
-        body.zPosition = 0
+        body.zPosition = 1
         body.texture = texture
-        body.scale(to: scale)
+       
         addChild(body)
         score += 10
         return body
@@ -339,13 +327,36 @@ class GameScene: SKScene {
         
     }
     
+    private func foodPositionCheck() {
+    
+        enumerateChildNodes(withName: "Body"){
+         node, _ in
+            
+            if node.position == self.childNode(withName: "Food")?.position{
+    
+                self.childNode(withName: "Food")?.removeFromParent()
+                self.foodCount = 0
+            
+            
+            }
+        
+        
+        }
+        
+    
+    
+    
+    }
+    
+    
     func snakeBodyMoving (){
+        
         var snakeLenght = snake.count-1
   
         while snakeLenght != 0 {
             
         
-       snake[snakeLenght].position.x = snake[snakeLenght-1].position.x
+        snake[snakeLenght].position.x = snake[snakeLenght-1].position.x
         snake[snakeLenght].position.y = snake[snakeLenght-1].position.y
             
                 
@@ -357,10 +368,13 @@ class GameScene: SKScene {
        
         
     }
+    
+    
     func updateWithTimeSinceLastUpdate(timeSinceLastUpdate: CFTimeInterval) {
    
      
         timeSinceLastMove += timeSinceLastUpdate
+        
         if (timeSinceLastMove > 0.5) {
             timeSinceLastMove = 0
             
@@ -432,6 +446,8 @@ class GameScene: SKScene {
 
     
     override func update(_ currentTime: TimeInterval) {
+        self.foodPositionCheck()
+       
         scoreLabel.text = "SCORE: \(score) "
         var timeSinceLastUpdate = currentTime - lastUpdateTime
        
