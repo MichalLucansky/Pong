@@ -381,7 +381,7 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
                     
                     shotCount = 1
                     
-                    fireBullet(bullet: bullet, destination: bulletDestination, duration: 1.0)
+                    fireBullet(bullet: bullet, destination: bulletDestination, duration: 1.5)
                     if soundStatus.bool(forKey: "SOUNDSTATUS"){
                    self.run(SKAction.playSoundFileNamed("shoot.wav", waitForCompletion: false))
                     }
@@ -559,8 +559,11 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
         for touch in touches{
       let location = touch.location(in: self)
             
-            if atPoint(location).name == "ship"{
-                ship.move(touchLocation: location)
+          
+            if location.y < CGFloat(0){
+            let node = childNode(withName: "ship")
+                node?.position.x = location.x
+            
             }
             
             if let locationName = atPoint(location).name{
@@ -581,7 +584,7 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
                     if let view = self.view {
                         if let scene = BlockBreakerGameOver(fileNamed: "BlockBreakerGameOver") {
                             scene.scaleMode = .aspectFill
-                            view.presentScene(scene,transition: SKTransition.flipHorizontal(withDuration: TimeInterval(1.5)))
+                            view.presentScene(scene,transition: SKTransition.moveIn(with: SKTransitionDirection.left, duration: TimeInterval(0.5)))
                         }
                         
                         
@@ -622,8 +625,17 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches{
             let location = touch.location(in: self)
-            if atPoint(location).name == "ship"{
-                ship.move(touchLocation: location)
+            if atPoint(location).name != nil{
+                
+                shotCount = 0
+                
+                
+            }
+            
+            if location.y < CGFloat(-300){
+                let node = childNode(withName: "ship")
+                node?.position.x = location.x
+                
             }
             
         }
@@ -669,7 +681,7 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
             let shipToDelete = SpaceInvadersClass.shipLiveCount.removeLast()
             SpaceInvadersClass.lifeCount -= 1
             shipToDelete.removeFromParent()
-            print(SpaceInvadersClass.shipLiveCount)
+            
             
         
         }
@@ -727,7 +739,7 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
                     scene.scaleMode = .aspectFill
                     
                     // Present the scene
-                    view.presentScene(scene,transition: SKTransition.flipHorizontal(withDuration: TimeInterval(1.5)))
+                    view.presentScene(scene,transition: SKTransition.moveIn(with: SKTransitionDirection.left, duration: TimeInterval(0.5)))
                 }
                 
                 
@@ -748,7 +760,7 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
                     scene.scaleMode = .aspectFill
                     
                     // Present the scene
-                    view.presentScene(scene,transition: SKTransition.flipHorizontal(withDuration: TimeInterval(1.5)))
+                    view.presentScene(scene,transition: SKTransition.moveIn(with: SKTransitionDirection.left, duration: TimeInterval(0.5)))
                 }
                 
                 
@@ -771,8 +783,7 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
                         scene.scaleMode = .aspectFill
                         
                         // Present the scene
-                        view.presentScene(scene,transition: SKTransition.flipHorizontal(withDuration: TimeInterval(1.5)))
-                    }
+                        view.presentScene(scene,transition: SKTransition.moveIn(with: SKTransitionDirection.left, duration: TimeInterval(0.5)))                    }
                     
                     
                 }

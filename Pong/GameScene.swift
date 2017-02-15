@@ -37,7 +37,13 @@ class GameScene: SKScene {
     private var timeSinceLastMove: CFTimeInterval  = 0  // Seconds since the last move
     var backgroundMusic: SKAudioNode!
     private var soundStatus = UserDefaults.standard
-    
+    private var nextPossibleMove = [SnakeDirection]()
+    private var moveArray = [SnakeDirection]()
+    let moveLeft = UISwipeGestureRecognizer()
+    let moveRight = UISwipeGestureRecognizer()
+    let moveUp = UISwipeGestureRecognizer()
+    let moveDown = UISwipeGestureRecognizer()
+    private var blockedMove : SnakeDirection = .none
     private enum SnakeDirection{
         
         case left
@@ -52,6 +58,8 @@ class GameScene: SKScene {
     
     
     override func didMove(to view: SKView) {
+        
+        
         if soundStatus.bool(forKey: "SOUNDSTATUS"){
             if let musicURL = Bundle.main.url(forResource: "02 HHavok-main", withExtension: "mp3") {
                 backgroundMusic = SKAudioNode(url: musicURL)
@@ -75,16 +83,170 @@ class GameScene: SKScene {
         scoreLabel = (childNode(withName: "Score") as? SKLabelNode)!
         pauseLabel = (childNode(withName: "Pause") as? SKLabelNode)!
         unpauseLabele = (childNode(withName: "Unpause") as? SKLabelNode)!
-        left = (childNode(withName: "Left") as? SKSpriteNode)!
-        right = (childNode(withName: "Right") as? SKSpriteNode)!
-        down = (childNode(withName: "Down") as? SKSpriteNode)!
-        up = (childNode(withName: "Up") as? SKSpriteNode)!
-        border = (childNode(withName: "Border") as? SKSpriteNode)!
         snake.append(createSnakeHead())
-   
-       
+        
+        movevingSnake()
         
            }
+    
+    @objc private func movedRight(sender:UISwipeGestureRecognizer){
+        
+        xSpeed = CGFloat(40)
+        ySpeed = CGFloat(0)
+        snakeDirection = .right
+        rotation = CGFloat(M_PI_2)
+        offsetX = -40
+        offsetY = 0
+        blockedMove = .left
+        moveArray.append(.right)
+        nextPossibleMove.append(.left)
+        
+        
+        
+    }
+    @objc private func movedLeft(sender:UISwipeGestureRecognizer){
+    
+        xSpeed = CGFloat(-40)
+        ySpeed = CGFloat(0)
+        snakeDirection = .left
+        rotation = CGFloat(M_PI_2) * -1
+        offsetX = 40
+        offsetY = 0
+        blockedMove = .right
+        moveArray.append(.left)
+        nextPossibleMove.append(.right)
+
+        
+    }
+    @objc private func movedUp(sender:UISwipeGestureRecognizer){
+        
+        ySpeed = CGFloat(40)
+        xSpeed = CGFloat(0)
+        snakeDirection = .up
+        rotation = CGFloat(M_PI)
+        offsetY = -40
+        offsetX = 0
+        blockedMove = .down
+        moveArray.append(.up)
+        nextPossibleMove.append(.down)
+       
+
+        
+        
+    }
+    @objc private func movedDown(sender:UISwipeGestureRecognizer){
+    
+        ySpeed = CGFloat(-40)
+        xSpeed = CGFloat(0)
+        snakeDirection = .down
+        
+        offsetY = 40
+        offsetX = 0
+        rotation = CGFloat(M_PI) * 2
+        blockedMove = .up
+        moveArray.append(.down)
+        nextPossibleMove.append(.up)
+
+        
+        
+    }
+    
+    private func movevingSnake(){
+        
+        moveRight.addTarget(self, action: #selector(GameScene.movedRight))
+        moveRight.direction = .right
+        self.view?.addGestureRecognizer(moveRight)
+        moveLeft.addTarget(self, action: #selector(GameScene.movedLeft))
+        moveLeft.direction = .left
+        self.view?.addGestureRecognizer(moveLeft)
+        moveUp.addTarget(self, action: #selector(GameScene.movedUp))
+        moveUp.direction = .up
+        self.view?.addGestureRecognizer(moveUp)
+        moveDown.addTarget(self, action: #selector(GameScene.movedDown))
+        moveDown.direction = .down
+        self.view?.addGestureRecognizer(moveDown)
+        
+    }
+
+    
+    
+    private func snakeMoveControl(){
+        
+     
+        
+        if moveArray.count == 2{
+        let temp = moveArray.remove(at: 0)
+            
+        if temp == blockedMove {
+            
+                switch temp {
+                case .left:
+                    
+                    xSpeed = CGFloat(-40)
+                    ySpeed = CGFloat(0)
+                    snakeDirection = .left
+                    rotation = CGFloat(M_PI_2) * -1
+                    offsetX = 40
+                    offsetY = 0
+                    blockedMove = .right
+                    moveArray.append(.left)
+                    nextPossibleMove.append(.right)
+                    moveArray.removeFirst()
+                    
+                case .right:
+                    xSpeed = CGFloat(40)
+                    ySpeed = CGFloat(0)
+                    snakeDirection = .right
+                    rotation = CGFloat(M_PI_2)
+                    offsetX = -40
+                    offsetY = 0
+                    blockedMove = .left
+                    moveArray.append(.right)
+                    nextPossibleMove.append(.left)
+                    moveArray.removeFirst()
+                    
+                case .up:
+                    ySpeed = CGFloat(40)
+                    xSpeed = CGFloat(0)
+                    snakeDirection = .up
+                    rotation = CGFloat(M_PI)
+                    offsetY = -40
+                    offsetX = 0
+                    blockedMove = .down
+                    moveArray.append(.up)
+                    nextPossibleMove.append(.down)
+                    
+                    moveArray.removeFirst()
+                    
+                case .down:
+                    ySpeed = CGFloat(-40)
+                    xSpeed = CGFloat(0)
+                    snakeDirection = .down
+                    
+                    offsetY = 40
+                    offsetX = 0
+                    rotation = CGFloat(M_PI) * 2
+                    blockedMove = .up
+                    moveArray.append(.down)
+                    nextPossibleMove.append(.up)
+                    moveArray.removeFirst()
+
+                    
+                    
+                default:
+                    break
+                }
+                
+            }
+        
+    
+        }
+    
+    
+    }
+    
+    
+    
     
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -93,56 +255,6 @@ class GameScene: SKScene {
             
             if let touchLocation = atPoint(location).name{
                 switch touchLocation {
-                case "Left":
-                    xSpeed = CGFloat(-40)
-                    ySpeed = CGFloat(0)
-                    snakeDirection = .left
-                    rotation = CGFloat(M_PI_2) * -1
-                    offsetX = 40
-                    offsetY = 0
-                  
-                    
-                    childNode(withName: "Right")?.isHidden = true
-                    childNode(withName: "Down")?.isHidden = false
-                    childNode(withName: "Up")?.isHidden = false
-                    
-                    
-                case "Right":
-                    xSpeed = CGFloat(40)
-                    ySpeed = CGFloat(0)
-                    snakeDirection = .right
-                    rotation = CGFloat(M_PI_2)
-                    offsetX = -40
-                    offsetY = 0
-                    
-                    
-                    childNode(withName: "Left")?.isHidden = true
-                    childNode(withName: "Down")?.isHidden = false
-                    childNode(withName: "Up")?.isHidden = false
-                    
-                case "Down":
-                    ySpeed = CGFloat(-40)
-                    xSpeed = CGFloat(0)
-                    snakeDirection = .down
-                    
-                    offsetY = 40
-                    offsetX = 0
-                    rotation = CGFloat(M_PI) * 2
-                    
-                    childNode(withName: "Up")?.isHidden = true
-                    
-                    childNode(withName: "Right")?.isHidden = false
-                    childNode(withName: "Left")?.isHidden = false
-                case "Up":
-                    ySpeed = CGFloat(40)
-                    xSpeed = CGFloat(0)
-                    snakeDirection = .up
-                    rotation = CGFloat(M_PI)
-                    offsetY = -40
-                    offsetX = 0
-                    childNode(withName: "Down")?.isHidden = true
-                    childNode(withName: "Right")?.isHidden = false
-                    childNode(withName: "Left")?.isHidden = false
                     
                 case "Pause" :
                     self.scene?.isPaused = true
@@ -167,7 +279,7 @@ class GameScene: SKScene {
                             scene.scaleMode = .aspectFill
                             
                             // Present the scene
-                            view.presentScene(scene,transition: SKTransition.flipHorizontal(withDuration: TimeInterval(1.5)))
+                            view.presentScene(scene,transition: SKTransition.moveIn(with: SKTransitionDirection.left, duration: TimeInterval(0.5)))
                         }
                         
                         
@@ -228,8 +340,8 @@ class GameScene: SKScene {
         }else if snakeHead.position.x == -360 && (snakeDirection == .left){
             snakeHead.position.x = 360
         }else if snakeHead.position.y == 640 && (snakeDirection == .up){
-            snakeHead.position.y = -360
-        }else if snakeHead.position.y == -360 && (snakeDirection == .down){
+            snakeHead.position.y = -640
+        }else if snakeHead.position.y == -640 && (snakeDirection == .down){
             snakeHead.position.y = 640
         }
        
@@ -240,7 +352,7 @@ class GameScene: SKScene {
     
     
     private func snakeMove(moveX: CGFloat, moveY: CGFloat){
-        
+    
         
     snake[0].position.x = snake[0].position.x + moveX
     snake[0].position.y = snake[0].position.y + moveY
@@ -379,9 +491,9 @@ class GameScene: SKScene {
             timeSinceLastMove = 0
             
             snakeTransition(snakeHead: snake[0])
-               snakeBodyMoving()
+            snakeBodyMoving()
             snakeMove(moveX: xSpeed, moveY: ySpeed)
-           
+          
             if snake[0].contains((childNode(withName: "Food")?.position)!) {
                 
                 childNode(withName: "Food")?.removeFromParent()
@@ -418,7 +530,7 @@ class GameScene: SKScene {
                         scene.scaleMode = .aspectFill
                         
                         // Present the scene
-                        view.presentScene(scene,transition: SKTransition.flipHorizontal(withDuration: TimeInterval(1.5)))
+                        view.presentScene(scene,transition: SKTransition.moveIn(with: SKTransitionDirection.left, duration: TimeInterval(0.5)))
                     }
                     
                     
@@ -446,15 +558,16 @@ class GameScene: SKScene {
 
     
     override func update(_ currentTime: TimeInterval) {
+       self.snakeMoveControl()
         self.foodPositionCheck()
-       
-        scoreLabel.text = "SCORE: \(score) "
+    scoreLabel.text = "SCORE: \(score) "
         var timeSinceLastUpdate = currentTime - lastUpdateTime
        
         lastUpdateTime = currentTime
         if timeSinceLastUpdate > 0.5 {
             timeSinceLastUpdate = 0.5 / 60.0
             lastUpdateTime = currentTime
+            
         }
         updateWithTimeSinceLastUpdate(timeSinceLastUpdate: timeSinceLastUpdate)
         

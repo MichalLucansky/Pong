@@ -79,8 +79,7 @@ class BlockBreakerGameOver: SKScene {
                             scene.scaleMode = .aspectFill
                             
                             // Present the scene
-                            view.presentScene(scene,transition: SKTransition.flipHorizontal(withDuration: TimeInterval(1.5)))
-                        }
+                            view.presentScene(scene,transition: SKTransition.moveIn(with: SKTransitionDirection.left, duration: TimeInterval(0.5)))                        }
                         
                         
                     }
@@ -94,7 +93,7 @@ class BlockBreakerGameOver: SKScene {
                                 scene.scaleMode = .aspectFill
                                 
                                 // Present the scene
-                                view.presentScene(scene,transition: SKTransition.flipHorizontal(withDuration: TimeInterval(1.5)))
+                                view.presentScene(scene,transition: SKTransition.moveIn(with: SKTransitionDirection.left, duration: TimeInterval(0.5)))
                             }
                             
                             
@@ -109,7 +108,7 @@ class BlockBreakerGameOver: SKScene {
                                 scene.scaleMode = .aspectFill
                                 
                                 // Present the scene
-                                view.presentScene(scene,transition: SKTransition.flipHorizontal(withDuration: TimeInterval(1.5)))
+                                view.presentScene(scene,transition: SKTransition.moveIn(with: SKTransitionDirection.left, duration: TimeInterval(0.5)))
                             }
                             
                             
@@ -123,7 +122,7 @@ class BlockBreakerGameOver: SKScene {
                     if let view = self.view {
                         if let scene = MainMenu(fileNamed: "MainMenu") {
                             scene.scaleMode = .aspectFill
-                            view.presentScene(scene,transition: SKTransition.flipHorizontal(withDuration: TimeInterval(1.5)))
+                            view.presentScene(scene,transition: SKTransition.moveIn(with: SKTransitionDirection.left, duration: TimeInterval(0.5)))
                         }
                         
                         

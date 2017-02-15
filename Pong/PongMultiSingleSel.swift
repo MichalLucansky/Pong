@@ -46,7 +46,7 @@ var backgroundMusic: SKAudioNode!
                             scene.scaleMode = .aspectFill
                         
                             // Present the scene
-                            view.presentScene(scene,transition: SKTransition.flipHorizontal(withDuration: TimeInterval(1.5)))
+                           view.presentScene(scene,transition: SKTransition.moveIn(with: SKTransitionDirection.left, duration: TimeInterval(0.5)))
                             
                         }
                         
@@ -62,7 +62,7 @@ var backgroundMusic: SKAudioNode!
                             scene.scaleMode = .aspectFill
                         
                             // Present the scene
-                            view.presentScene(scene,transition: SKTransition.flipHorizontal(withDuration: TimeInterval(1.5)))
+                            view.presentScene(scene,transition: SKTransition.moveIn(with: SKTransitionDirection.left, duration: TimeInterval(0.5)))
                             
                         }
                         

@@ -64,7 +64,7 @@ class MainMenu: SKScene{
                             scene.scaleMode = .aspectFill
                             
                             // Present the scene
-                            view.presentScene(scene,transition: SKTransition.flipHorizontal(withDuration: TimeInterval(1.5)))
+                            view.presentScene(scene,transition: SKTransition.moveIn(with: SKTransitionDirection.left, duration: TimeInterval(0.5)))
                             
                         }
                         
@@ -74,7 +74,7 @@ class MainMenu: SKScene{
                     if let view = self.view {
                         if let scene = BlockBreaker(fileNamed: "BlockBreakerScene") {
                             scene.scaleMode = .aspectFill
-                            view.presentScene(scene,transition: SKTransition.flipHorizontal(withDuration: TimeInterval(1.5)))
+                            view.presentScene(scene,transition: SKTransition.moveIn(with: SKTransitionDirection.left, duration: TimeInterval(0.5)))
                         }
                         
                         
@@ -83,7 +83,7 @@ class MainMenu: SKScene{
                     if let view = self.view {
                         if let scene = SpaceInvadersClass(fileNamed: "SpaceInvadersScene") {
                             scene.scaleMode = .aspectFill
-                            view.presentScene(scene,transition: SKTransition.flipHorizontal(withDuration: TimeInterval(1.5)))
+                            view.presentScene(scene,transition: SKTransition.moveIn(with: SKTransitionDirection.left, duration: TimeInterval(0.5)))
                         }
                         
                         
@@ -92,7 +92,7 @@ class MainMenu: SKScene{
                     if let view = self.view {
                         if let scene = GameScene(fileNamed: "GameScene") {
                             scene.scaleMode = .aspectFill
-                            view.presentScene(scene,transition: SKTransition.flipHorizontal(withDuration: TimeInterval(1.5)))
+                            view.presentScene(scene,transition: SKTransition.moveIn(with: SKTransitionDirection.left, duration: TimeInterval(0.5)))
                         }
                         
                         
@@ -101,7 +101,7 @@ class MainMenu: SKScene{
                     if let view = self.view {
                         if let scene = Settings(fileNamed: "Settings") {
                             scene.scaleMode = .aspectFill
-                            view.presentScene(scene,transition: SKTransition.flipHorizontal(withDuration: TimeInterval(1.5)))
+                            view.presentScene(scene,transition: SKTransition.moveIn(with: SKTransitionDirection.left, duration: TimeInterval(0.5)))
                         }
                         
                         

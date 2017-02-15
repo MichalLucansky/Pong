@@ -68,6 +68,25 @@ class Pong: SKScene {
         gamePauseEnd = childNode(withName: "GAMEISPAUSED") as! SKLabelNode
         gamePauseEnd.isHidden = true
         
+        
+        if status == false{
+            multiPlayer()
+        }
+        
+        
+        
+        
+    }
+    
+    private func multiPlayer(){
+    
+    enemyScoreLabel.position = CGPoint(x: 0, y: 630)
+    enemyScoreLabel.text = ("Player One : \(enemyScore)")
+    enemyScoreLabel.zRotation =  CGFloat(M_PI_2) * -2
+    playerScoreLabel.text = ("Player Two : \(playerScore)")
+        
+    
+    
     }
     
     
@@ -130,11 +149,14 @@ class Pong: SKScene {
             let location = touch.location(in: self)
            
             
-            if let node = self.atPoint(location) as? SKSpriteNode{
-                if node.name == "Player" || node.name == "Enemy"{
-                selectedNodes[touch] = node
-                
-                }
+            
+            if location.y > CGFloat(300){
+                let node = childNode(withName: "Enemy")
+                selectedNodes[touch] = node as! SKSpriteNode?
+            }else if location.y < CGFloat(-300){
+            
+                let node = childNode(withName: "Player")
+                selectedNodes[touch] = node as! SKSpriteNode?
             
             
             }
@@ -151,8 +173,7 @@ class Pong: SKScene {
                             scene.scaleMode = .aspectFill
                             
                             // Present the scene
-                            view.presentScene(scene,transition: SKTransition.flipHorizontal(withDuration: TimeInterval(1.5)))
-                            
+                            view.presentScene(scene,transition: SKTransition.moveIn(with: SKTransitionDirection.left, duration: TimeInterval(0.5)))
                         }
                     }
                     
@@ -218,12 +239,17 @@ class Pong: SKScene {
  
     override func update(_ currentTime: TimeInterval) {
         
+        if status == false{
+            multiPlayer()
+        }
+        
         if pauseStatus == true {
             gamePause()
             
         }else if pauseStatus == false{
         gameUnPause()
         }
+        
         
         if status {
         
@@ -250,7 +276,7 @@ class Pong: SKScene {
                         scene.scaleMode = .aspectFill
                         
                         // Present the scene
-                        view.presentScene(scene, transition: SKTransition.doorsOpenVertical(withDuration: TimeInterval(1.5)))
+                        view.presentScene(scene,transition: SKTransition.moveIn(with: SKTransitionDirection.left, duration: TimeInterval(0.5)))
                         
                         
                     }
@@ -268,7 +294,7 @@ class Pong: SKScene {
                         scene.scaleMode = .aspectFill
                         
                         // Present the scene
-                        view.presentScene(scene, transition: SKTransition.doorsOpenVertical(withDuration: TimeInterval(1.5)))
+                        view.presentScene(scene,transition: SKTransition.moveIn(with: SKTransitionDirection.left, duration: TimeInterval(0.5)))
                         
                         
                     }

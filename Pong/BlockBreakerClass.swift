@@ -14,7 +14,7 @@ class BlockBreaker: SKScene, SKPhysicsContactDelegate{
     private var soundStatus = UserDefaults.standard
     private var highScore = UserDefaults.standard
     private var playerPadle = Player()
-    private var ball = Ball()
+    private var ball = SKSpriteNode()
     private var brick = SKSpriteNode()
     private var score = Int()
     private var obstacle = Utilities()
@@ -26,15 +26,20 @@ class BlockBreaker: SKScene, SKPhysicsContactDelegate{
     static var nextLvlInit = false
     var randomNumber = GameScene()
     static var speedX = CGFloat(15)
-    static var speedY = CGFloat(-15)
+    static var speedY = CGFloat(15)
+    var XXXX = CGFloat(15)
+    var YYYY = CGFloat(-15)
+    var padleMoveArray = [CGFloat]()
+    var actualDirection = CGFloat()
+    var direction = String()
     private var brickCount = 0
     static var scoreToPass = Int()
     private var gameId = UserDefaults.standard
-    
-    
+   
     
     override func didMove(to view: SKView) {
        
+        
         
         if highScore.value(forKey: "highScore") == nil {
             highScore.set(0, forKey: "highScore")
@@ -50,15 +55,14 @@ class BlockBreaker: SKScene, SKPhysicsContactDelegate{
             BlockBreaker.speedY += -1
         
         }else{
-            BlockBreaker.speedX = 15
-            BlockBreaker.speedY = -15
-        
+            BlockBreaker.speedX = XXXX
+            BlockBreaker.speedY = YYYY
         }
         
 
         initialization()
        
-        ball.ballMove(ball: ball,  speedX: BlockBreaker.speedX , speedY: BlockBreaker.speedY)
+        ball.physicsBody?.applyImpulse(CGVector(dx: BlockBreaker.speedX, dy: BlockBreaker.speedY))
         
         if BlockBreaker.nextLvlInit {
             var i = 0
@@ -83,6 +87,30 @@ class BlockBreaker: SKScene, SKPhysicsContactDelegate{
     
     }
     
+    private func padleMoveDirection(){
+    
+        if padleMoveArray.count == 2{
+            let temp = padleMoveArray[0]
+            
+            let dir =  padleMoveArray[1]
+            
+            actualDirection = dir - temp
+            
+            if actualDirection < 0 {
+                direction = "LEFT"
+            
+            }else if actualDirection > 0{
+                direction = "RIGHT"
+            
+            }else if actualDirection == 0{
+                direction = "STOP"
+            
+            
+            }
+            padleMoveArray.removeFirst()
+            
+    }
+    }
     
      private func addObstacle(){
         
@@ -91,6 +119,9 @@ class BlockBreaker: SKScene, SKPhysicsContactDelegate{
         obstacleNumber += 1
         
     }
+    
+    
+   
     
     private func initialization(){
         
@@ -108,7 +139,7 @@ class BlockBreaker: SKScene, SKPhysicsContactDelegate{
        
   
         playerPadle = childNode(withName: "Player") as! Player
-        ball = childNode(withName: "ball") as! Ball
+        ball = childNode(withName: "ball") as! SKSpriteNode
         scoreLabel = childNode(withName: "Score") as! SKLabelNode
         menuLabel = childNode(withName: "EndGame") as! SKLabelNode
         pauseLabel = childNode(withName: "Pause") as! SKLabelNode
@@ -137,7 +168,7 @@ class BlockBreaker: SKScene, SKPhysicsContactDelegate{
                                        if let view = self.view {
                         if let scene = BlockBreakerGameOver(fileNamed: "BlockBreakerGameOver") {
                             scene.scaleMode = .aspectFill
-                            view.presentScene(scene,transition: SKTransition.flipHorizontal(withDuration: TimeInterval(1.5)))
+                            view.presentScene(scene,transition: SKTransition.moveIn(with: SKTransitionDirection.left, duration: TimeInterval(0.5)))
                         }
                         
                         
@@ -169,24 +200,67 @@ class BlockBreaker: SKScene, SKPhysicsContactDelegate{
         
         if bodyAName == "ball" && bodyBName == "brick" || bodyAName == "brick" && bodyBName! == "ball"{
             if bodyAName == "brick"{
+               
                 contact.bodyA.node?.removeFromParent()
+                
                 brickCount += 1
                 score += 10
                 scoreLabel.text = "SCORE: \(score)"
                 
+                
             }else if  bodyBName == "brick"{
+                
                 contact.bodyB.node?.removeFromParent()
                 brickCount += 1
                 score += 10
                 scoreLabel.text = "SCORE: \(score)"
-            }
-        }    }
+                
+                            }
+        }
     
+        if bodyAName == "ball" && bodyBName == "Player" || bodyAName == "Player" && bodyBName == "ball"{
+            
+            let node = childNode(withName: "ball")
+            
+            
+            switch direction {
+            case "LEFT":
+                node?.physicsBody?.velocity = CGVector(dx: -500, dy: 500)
+                node?.physicsBody?.angularDamping = 0.2
+               
+            case "RIGHT":
+                node?.physicsBody?.velocity = CGVector(dx: 500, dy: 500)
+                 node?.physicsBody?.angularDamping = 0.2
+                
+            
+            default:
+                break
+            }
+            print(direction)
+            
+           
+        }
+    
+    
+    }
+    
+   
    
     
     override func update(_ currentTime: TimeInterval) {
         
-       
+  
+        
+       padleMoveArray.append((childNode(withName: "Player")?.position.x)!)
+        
+        padleMoveDirection()
+        
+        
+        
+        
+      
+        
+        
         scoreLabel.text = "SCORE: \(score)"
         if BlockBreaker.nextLvlInit && obstacleNumber == 0{
             
@@ -226,7 +300,7 @@ class BlockBreaker: SKScene, SKPhysicsContactDelegate{
                     scene.scaleMode = .aspectFill
                     
                     // Present the scene
-                    view.presentScene(scene, transition: SKTransition.flipHorizontal(withDuration: TimeInterval(1.5)))
+                    view.presentScene(scene,transition: SKTransition.moveIn(with: SKTransitionDirection.left, duration: TimeInterval(0.5)))
                     
                     
                 }
@@ -254,7 +328,7 @@ class BlockBreaker: SKScene, SKPhysicsContactDelegate{
                     scene.scaleMode = .aspectFill
                     
                     // Present the scene
-                    view.presentScene(scene, transition: SKTransition.flipHorizontal(withDuration: TimeInterval(1.5)))
+                    view.presentScene(scene,transition: SKTransition.moveIn(with: SKTransitionDirection.left, duration: TimeInterval(0.5)))
                     
                     
                 }
