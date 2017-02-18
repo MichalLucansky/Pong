@@ -32,17 +32,18 @@ class Pong: SKScene {
     
     override func didMove(to view: SKView) {
         
-        initialization()
-        ball.ballMove(ball: ball, speedX: speedX, speedY: speedY)
+        
         
         if soundStatus.bool(forKey: "SOUNDSTATUS"){
         if let musicURL = Bundle.main.url(forResource: "02 HHavok-main", withExtension: "mp3") {
             backgroundMusic = SKAudioNode(url: musicURL)
             addChild(backgroundMusic)
            
-        }
+            }
         }
 
+        initialization()
+        ball.ballMove(ball: ball, speedX: speedX, speedY: speedY)
     }
     
    
