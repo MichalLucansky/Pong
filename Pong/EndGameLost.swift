@@ -12,8 +12,8 @@ import SpriteKit
 class EndGameLost: SKScene{
 private var mainMenu = SKLabelNode()
 private var playAgain = SKLabelNode()
-   var backgroundMusic: SKAudioNode!
-    private var soundStatus = UserDefaults.standard
+private var backgroundMusic: SKAudioNode!
+private var soundStatus = UserDefaults.standard
     
 
 

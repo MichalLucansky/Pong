@@ -11,7 +11,7 @@ import SpriteKit
 
 class PongMultiSingleSel:SKScene{
 
-var backgroundMusic: SKAudioNode!
+    private var backgroundMusic: SKAudioNode!
     private var soundStatus = UserDefaults.standard
     private var multiPlay = SKLabelNode()
     private var single = SKLabelNode()

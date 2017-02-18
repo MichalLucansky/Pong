@@ -10,7 +10,7 @@ import SpriteKit
 
 class BlockBreaker: SKScene, SKPhysicsContactDelegate{
     
-    var backgroundMusic: SKAudioNode!
+    private var backgroundMusic: SKAudioNode!
     private var soundStatus = UserDefaults.standard
     private var highScore = UserDefaults.standard
     private var playerPadle = Player()
@@ -24,14 +24,12 @@ class BlockBreaker: SKScene, SKPhysicsContactDelegate{
     private var unpauseLabel = SKLabelNode()
     private var obstacleNumber = 0
     static var nextLvlInit = false
-    var randomNumber = GameScene()
+    private var randomNumber = GameScene()
     static var speedX = CGFloat(15)
-    static var speedY = CGFloat(15)
-    var XXXX = CGFloat(15)
-    var YYYY = CGFloat(-15)
-    var padleMoveArray = [CGFloat]()
-    var actualDirection = CGFloat()
-    var direction = String()
+    static var speedY = CGFloat(-15)
+    private var padleMoveArray = [CGFloat]()
+    private var actualDirection = CGFloat()
+    private var direction = String()
     private var brickCount = 0
     static var scoreToPass = Int()
     private var gameId = UserDefaults.standard
@@ -55,8 +53,8 @@ class BlockBreaker: SKScene, SKPhysicsContactDelegate{
             BlockBreaker.speedY += -1
         
         }else{
-            BlockBreaker.speedX = XXXX
-            BlockBreaker.speedY = YYYY
+            BlockBreaker.speedX = BlockBreaker.speedX
+            BlockBreaker.speedY = BlockBreaker.speedY
         }
         
 
@@ -236,7 +234,7 @@ class BlockBreaker: SKScene, SKPhysicsContactDelegate{
             default:
                 break
             }
-            print(direction)
+            
             
            
         }
@@ -251,7 +249,7 @@ class BlockBreaker: SKScene, SKPhysicsContactDelegate{
         
   
         
-       padleMoveArray.append((childNode(withName: "Player")?.position.x)!)
+        padleMoveArray.append((childNode(withName: "Player")?.position.x)!)
         
         padleMoveDirection()
         
@@ -268,14 +266,16 @@ class BlockBreaker: SKScene, SKPhysicsContactDelegate{
             
         
         }
+        
         if BlockBreaker.nextLvlInit{
-        if   (childNode(withName: "Obstacle")?.position.x)! > self.frame.width / 2 {
-            obstacleNumber -= 1
-            childNode(withName: "Obstacle")?.removeFromParent()
+            
+            if   (childNode(withName: "Obstacle")?.position.x)! > self.frame.width / 2 {
+                obstacleNumber -= 1
+                childNode(withName: "Obstacle")?.removeFromParent()
            
             
             
-        }
+            }
         }
         
       
@@ -292,6 +292,7 @@ class BlockBreaker: SKScene, SKPhysicsContactDelegate{
             highScore.set(score, forKey: "highScore")
             
             }
+            
            BlockBreaker.nextLvlInit = false
             if let view = self.view {
                 // Load the SKScene from 'GameOverScene'

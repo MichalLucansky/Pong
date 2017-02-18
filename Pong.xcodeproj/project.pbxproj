@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		370804941E3671F400005321 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370804931E3671F400005321 /* Settings.swift */; };
 		370804B41E3672D000005321 /* Settings.sks in Resources */ = {isa = PBXBuildFile; fileRef = 370804B31E3672D000005321 /* Settings.sks */; };
+		3742819D1E58D2020023C38A /* Prologue.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3742819C1E58D2020023C38A /* Prologue.mp3 */; };
 		3752859F1E069B70004AE801 /* BlockBreakerGameOver.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3752859E1E069B70004AE801 /* BlockBreakerGameOver.sks */; };
 		375285A11E069B83004AE801 /* BlockBreakerGameOverClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375285A01E069B83004AE801 /* BlockBreakerGameOverClass.swift */; };
 		375285A31E06A363004AE801 /* NextLvlClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375285A21E06A363004AE801 /* NextLvlClass.swift */; };
@@ -52,6 +53,7 @@
 /* Begin PBXFileReference section */
 		370804931E3671F400005321 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		370804B31E3672D000005321 /* Settings.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Settings.sks; sourceTree = "<group>"; };
+		3742819C1E58D2020023C38A /* Prologue.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Prologue.mp3; sourceTree = "<group>"; };
 		3752859E1E069B70004AE801 /* BlockBreakerGameOver.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BlockBreakerGameOver.sks; sourceTree = "<group>"; };
 		375285A01E069B83004AE801 /* BlockBreakerGameOverClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockBreakerGameOverClass.swift; sourceTree = "<group>"; };
 		375285A21E06A363004AE801 /* NextLvlClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NextLvlClass.swift; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 				37AE573E1E03257000C402D6 /* Assets.xcassets */,
 				37D2DABA1E30AE890036584A /* 08 Ascending.mp3 */,
 				37CD33B71E2E71E50093991B /* 02 HHavok-main.mp3 */,
+				3742819C1E58D2020023C38A /* Prologue.mp3 */,
 				37615B081E2D2671006B7485 /* 03 Chibi Ninja.mp3 */,
 				37615B061E2D2584006B7485 /* 01 A Night Of Dizzy Spells.mp3 */,
 				37615B041E2D21F2006B7485 /* 10 Arpanauts.mp3 */,
@@ -428,6 +431,7 @@
 				37AE57511E0338C600C402D6 /* LCDPHONE.TTF in Resources */,
 				37B2E2361E055D1F008D095A /* MainMenu.sks in Resources */,
 				375285A81E06F1B1004AE801 /* SpaceInvadersScene.sks in Resources */,
+				3742819D1E58D2020023C38A /* Prologue.mp3 in Resources */,
 				37615AFF1E2D17B4006B7485 /* explosion.wav in Resources */,
 				370804B41E3672D000005321 /* Settings.sks in Resources */,
 				37615B071E2D2584006B7485 /* 01 A Night Of Dizzy Spells.mp3 in Resources */,

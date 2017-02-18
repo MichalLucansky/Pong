@@ -9,7 +9,7 @@
 import SpriteKit
 
 class MainMenu: SKScene{
-    var backgroundMusic: SKAudioNode!
+    private var backgroundMusic: SKAudioNode!
     private var pong = SKLabelNode()
     private var blockBreaker = SKLabelNode()
     private var spaceInvaders = SKLabelNode()

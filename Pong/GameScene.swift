@@ -8,22 +8,15 @@
 
 import SpriteKit
 import GameplayKit
-import UIKit
+
 
 class GameScene: SKScene {
-    let worldSizeHeight = 1000
-    let worldSizeWidth = 800
-    var rotation = CGFloat()
-    var left = SKNode()
-    var right = SKNode()
-    var down = SKNode()
-    var up = SKNode()
-    var border = SKNode()
+    private var rotation = CGFloat()
     private var snakeDirection : SnakeDirection = .none
-    var offsetX = CGFloat(0)
-    var offsetY = CGFloat(0)
-    var xSpeed = CGFloat(0)
-    var ySpeed = CGFloat(0)
+    private var offsetX = CGFloat(0)
+    private var offsetY = CGFloat(0)
+    private var xSpeed = CGFloat(0)
+    private var ySpeed = CGFloat(0)
     private var pauseLabel = SKLabelNode()
     private var unpauseLabele = SKLabelNode()
     private var foodTexturesArray = [SKTexture]()
@@ -35,15 +28,17 @@ class GameScene: SKScene {
     private var score = 0
     private var snakeScore = UserDefaults.standard
     private var timeSinceLastMove: CFTimeInterval  = 0  // Seconds since the last move
-    var backgroundMusic: SKAudioNode!
+    private var snakeSpeedTimer = 0.5
+    private var backgroundMusic: SKAudioNode!
     private var soundStatus = UserDefaults.standard
     private var nextPossibleMove = [SnakeDirection]()
     private var moveArray = [SnakeDirection]()
-    let moveLeft = UISwipeGestureRecognizer()
-    let moveRight = UISwipeGestureRecognizer()
-    let moveUp = UISwipeGestureRecognizer()
-    let moveDown = UISwipeGestureRecognizer()
+    private let moveLeft = UISwipeGestureRecognizer()
+    private let moveRight = UISwipeGestureRecognizer()
+    private let moveUp = UISwipeGestureRecognizer()
+    private let moveDown = UISwipeGestureRecognizer()
     private var blockedMove : SnakeDirection = .none
+    
     private enum SnakeDirection{
         
         case left
@@ -51,8 +46,6 @@ class GameScene: SKScene {
         case down
         case up
         case none
-        
-        
         
     }
     
@@ -80,6 +73,7 @@ class GameScene: SKScene {
                              SKTexture(imageNamed: String(format: "orange.png")),
                              SKTexture(imageNamed: String(format: "strawbery.png"))
                             ]
+        
         scoreLabel = (childNode(withName: "Score") as? SKLabelNode)!
         pauseLabel = (childNode(withName: "Pause") as? SKLabelNode)!
         unpauseLabele = (childNode(withName: "Unpause") as? SKLabelNode)!
@@ -487,7 +481,7 @@ class GameScene: SKScene {
      
         timeSinceLastMove += timeSinceLastUpdate
         
-        if (timeSinceLastMove > 0.5) {
+        if (timeSinceLastMove > snakeSpeedTimer) { // 0.5
             timeSinceLastMove = 0
             
             snakeTransition(snakeHead: snake[0])
@@ -551,27 +545,46 @@ class GameScene: SKScene {
     
   
     
-
+    private func snakeSpeedIncreaser(snakeScore: Int){
+       
+        if snakeScore >= 10 && snakeScore % 100 == 0 {
+        snakeSpeedTimer -= 0.05
+        }
+    
+        if snakeSpeedTimer < 0.20{
+        snakeSpeedTimer = 0.20
+        
+        }
+        
+    
+    
+    }
     
     
     
 
     
     override func update(_ currentTime: TimeInterval) {
-       self.snakeMoveControl()
+        
+       
+        
+        self.snakeMoveControl()
         self.foodPositionCheck()
-    scoreLabel.text = "SCORE: \(score) "
+        
+        scoreLabel.text = "SCORE: \(score) "
+        
         var timeSinceLastUpdate = currentTime - lastUpdateTime
        
         lastUpdateTime = currentTime
-        if timeSinceLastUpdate > 0.5 {
-            timeSinceLastUpdate = 0.5 / 60.0
+        if timeSinceLastUpdate > snakeSpeedTimer { // 0.5
+            timeSinceLastUpdate = snakeSpeedTimer / 60.0 // 0.5/60
             lastUpdateTime = currentTime
             
         }
         updateWithTimeSinceLastUpdate(timeSinceLastUpdate: timeSinceLastUpdate)
         
         if foodCount == 0{
+            snakeSpeedIncreaser(snakeScore: score)
             self.addChild(createFood())
             foodCount = 1
         }

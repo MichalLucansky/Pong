@@ -10,7 +10,7 @@ import SpriteKit
 
 
 class BlockBreakerGameOver: SKScene {
-    var backgroundMusic: SKAudioNode!
+    private  var backgroundMusic: SKAudioNode!
     private var soundStatus = UserDefaults.standard
     private var highScore = UserDefaults.standard
     private var highScoreLabel = SKLabelNode()

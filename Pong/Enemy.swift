@@ -12,13 +12,13 @@ class Enemy: SKSpriteNode {
     
     
     
-    func moveEnemy(ballPosition: SKSpriteNode, enemy: SKSpriteNode) {
+    func moveEnemy(ballPosition: SKSpriteNode, enemy: SKSpriteNode, duration: Double) {
         
         
         
         
         
-        enemy.run(SKAction.moveTo(x: ballPosition.position.x, duration: 0.34
+        enemy.run(SKAction.moveTo(x: ballPosition.position.x, duration: duration
             
         ))
        

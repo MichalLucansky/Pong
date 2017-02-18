@@ -10,7 +10,7 @@ import SpriteKit
 import GameplayKit
 
 class Pong: SKScene {
-    var backgroundMusic: SKAudioNode!
+    private var backgroundMusic: SKAudioNode!
     private var soundStatus = UserDefaults.standard
     private var player = Player()
     private var secondPlayer = Enemy()
@@ -21,18 +21,19 @@ class Pong: SKScene {
     private var pause = SKLabelNode()
     private var enemyScoreLabel = SKLabelNode()
     private var playerScoreLabel = SKLabelNode()
-    private var center = CGFloat()
     private var enemyScore = 0
     private var playerScore = 0
-    private var pauseVariable = Utilities()
     private var pauseStatus = false
     private var status  = PongMultiSingleSel.statusInit
     private var selectedNodes:[UITouch:SKSpriteNode] = [:]
+    private var speedX = CGFloat(-15)
+    private var speedY = CGFloat(15)
+    private var enemyMovingSpeed = 0.30
     
     override func didMove(to view: SKView) {
         
         initialization()
-        ball.ballMove(ball: ball, speedX: -15, speedY: 15)
+        ball.ballMove(ball: ball, speedX: speedX, speedY: speedY)
         
         if soundStatus.bool(forKey: "SOUNDSTATUS"){
         if let musicURL = Bundle.main.url(forResource: "02 HHavok-main", withExtension: "mp3") {
@@ -78,6 +79,69 @@ class Pong: SKScene {
         
     }
     
+    private func ballSpeedIncreaser(pointCount: Int, playerWhoWon: SKSpriteNode){
+        print(pointCount)
+        switch pointCount {
+        case 1...2:
+            if playerWhoWon == player{
+            ball.physicsBody?.applyImpulse(CGVector(dx: -15, dy: -15))
+            }else if playerWhoWon == enemy{
+            ball.physicsBody?.applyImpulse(CGVector(dx: 15, dy: 15))
+                
+            }
+        case 3...5:
+            enemyMovingSpeed = 0.253
+            if playerWhoWon == player{
+                ball.physicsBody?.applyImpulse(CGVector(dx: -17, dy: -17))
+            }else if playerWhoWon == enemy{
+                ball.physicsBody?.applyImpulse(CGVector(dx: 17, dy: 17))
+                
+                
+            }
+        case 6...8:
+            enemyMovingSpeed = 0.229
+            if playerWhoWon == player{
+                ball.physicsBody?.applyImpulse(CGVector(dx: -19, dy: -19))
+            }else if playerWhoWon == enemy{
+                ball.physicsBody?.applyImpulse(CGVector(dx: 19, dy: 19))
+                
+                
+            }
+        case 9...10:
+            enemyMovingSpeed = 0.22
+            if playerWhoWon == player{
+                ball.physicsBody?.applyImpulse(CGVector(dx: -21, dy: -21))
+            }else if playerWhoWon == enemy{
+                ball.physicsBody?.applyImpulse(CGVector(dx: 21, dy: 21))
+                
+            }
+        case 11...15:
+            enemyMovingSpeed = 0.20
+            if playerWhoWon == player{
+                ball.physicsBody?.applyImpulse(CGVector(dx: -23, dy: -23))
+            }else if playerWhoWon == enemy{
+                ball.physicsBody?.applyImpulse(CGVector(dx: 23, dy: 23))
+                
+            }
+        case 16...19:
+            enemyMovingSpeed = 0.176
+            if playerWhoWon == player{
+                ball.physicsBody?.applyImpulse(CGVector(dx: -25, dy: -25))
+            }else if playerWhoWon == enemy{
+                ball.physicsBody?.applyImpulse(CGVector(dx: 25, dy: 25))
+                
+            }
+
+        default:
+            break
+        }
+    
+    
+    
+    
+    }
+    
+    
     private func multiPlayer(){
     
     enemyScoreLabel.position = CGPoint(x: 0, y: 630)
@@ -97,16 +161,18 @@ class Pong: SKScene {
         ball.position = CGPoint(x: 0, y: 0)
         ball.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
         
+        ballSpeedIncreaser(pointCount: playerScore + enemyScore + 1, playerWhoWon: playerWhoWon)
+        
         if playerWhoWon == player {
             playerScore += 1
             playerScoreLabel.text = ("Player : \(playerScore)")
-            ball.physicsBody?.applyImpulse(CGVector(dx: -15, dy: -15))
+            
             
         }
         if playerWhoWon == enemy {
             enemyScore += 1
             enemyScoreLabel.text = ("UI Player : \(enemyScore)")
-            ball.physicsBody?.applyImpulse(CGVector(dx: 15, dy: 15))
+            
         }
         
         
@@ -253,7 +319,7 @@ class Pong: SKScene {
         
         if status {
         
-        enemy.moveEnemy(ballPosition: ball, enemy: enemy)
+        enemy.moveEnemy(ballPosition: ball, enemy: enemy, duration: enemyMovingSpeed)
         }
         
         if ball.position.y > enemy.position.y{

@@ -49,7 +49,7 @@ class Settings: SKScene{
         childNode(withName: "OFF")?.isHidden = onOffLabelStatus.1.bool(forKey: "offLabelStatus")
         
         if soundStatus.bool(forKey: "SOUNDSTATUS"){
-            if let musicURL = Bundle.main.url(forResource: "10 Arpanauts", withExtension: "mp3") {
+            if let musicURL = Bundle.main.url(forResource: "Prologue", withExtension: "mp3") {
                 backgroundMusic = SKAudioNode(url: musicURL)
                 
                 addChild(backgroundMusic!)
@@ -116,11 +116,39 @@ class Settings: SKScene{
             
             switch possitionName {
             case "ON" :
-                self.backgroundMusic?.run(SKAction.changeVolume(by: -50, duration: 0.0))
+                
                 self.soundsOff()
+                if let view = self.view {
+                    // Load the SKScene from 'GameScene.sks'
+                    if let scene = Settings(fileNamed: "Settings") {
+                        // Set the scale mode to scale to fit the window
+                        scene.scaleMode = .aspectFill
+                        
+                        // Present the scene
+                        view.presentScene(scene)
+                        
+                    }
+                    
+                    
+                }
+
             case "OFF" :
+                
                 self.soundsOn()
-              self.backgroundMusic?.run(SKAction.changeVolume(by: 1, duration: 0.0))
+                if let view = self.view {
+                    // Load the SKScene from 'GameScene.sks'
+                    if let scene = Settings(fileNamed: "Settings") {
+                        // Set the scale mode to scale to fit the window
+                        scene.scaleMode = .aspectFill
+                        
+                        // Present the scene
+                        view.presentScene(scene)
+                        
+                    }
+                    
+                    
+                }
+              
                 
             case "Back" :
                 if let view = self.view {
@@ -130,7 +158,7 @@ class Settings: SKScene{
                         scene.scaleMode = .aspectFill
                         
                         // Present the scene
-                        view.presentScene(scene,transition: SKTransition.moveIn(with: SKTransitionDirection.left, duration: TimeInterval(0.5)))
+                        view.presentScene(scene,transition: SKTransition.moveIn(with: SKTransitionDirection.left, duration: TimeInterval(0.0)))
                         
                     }
                     
