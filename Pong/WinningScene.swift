@@ -9,13 +9,21 @@
 import SpriteKit
 
 class WinningSceneClass: SKScene{
-    
+    private var backgroundMusic: SKAudioNode!
+    private var soundStatus = UserDefaults.standard
     private var playAgainLabel = SKLabelNode()
     private var backToMenuLabel = SKLabelNode()
 
     
     override func didMove(to view: SKView) {
         
+        // BG music
+        if soundStatus.bool(forKey: "SOUNDSTATUS"){
+            if let musicURL = Bundle.main.url(forResource: "Prologue", withExtension: "mp3") {
+                backgroundMusic = SKAudioNode(url: musicURL)
+                addChild(backgroundMusic)
+            }
+        }
         
         playAgainLabel = self.childNode(withName: "PlayAgainLabel") as! SKLabelNode
         backToMenuLabel = self.childNode(withName: "BackToMenu") as! SKLabelNode

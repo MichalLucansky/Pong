@@ -91,7 +91,7 @@ class Pong: SKScene {
                 
             }
         case 3...5:
-            enemyMovingSpeed = 0.253
+            enemyMovingSpeed = 0.255
             if playerWhoWon == player{
                 ball.physicsBody?.applyImpulse(CGVector(dx: -17, dy: -17))
             }else if playerWhoWon == enemy{

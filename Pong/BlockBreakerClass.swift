@@ -36,7 +36,15 @@ class BlockBreaker: SKScene, SKPhysicsContactDelegate{
    
     
     override func didMove(to view: SKView) {
-       
+        
+        if soundStatus.bool(forKey: "SOUNDSTATUS"){
+            if let musicURL = Bundle.main.url(forResource: "03 Chibi Ninja", withExtension: "mp3") {
+                backgroundMusic = SKAudioNode(url: musicURL)
+                addChild(backgroundMusic)
+            }
+            
+            
+        }
         
         
         if highScore.value(forKey: "highScore") == nil {
@@ -74,14 +82,7 @@ class BlockBreaker: SKScene, SKPhysicsContactDelegate{
             
         }
         
-        if soundStatus.bool(forKey: "SOUNDSTATUS"){
-        if let musicURL = Bundle.main.url(forResource: "03 Chibi Ninja", withExtension: "mp3") {
-            backgroundMusic = SKAudioNode(url: musicURL)
-            addChild(backgroundMusic)
-            }
         
-
-        }
     
     }
     

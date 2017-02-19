@@ -82,6 +82,14 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
     
     override func didMove(to view: SKView) {
         
+        // BG music
+        if soundStatus.bool(forKey: "SOUNDSTATUS"){
+            if let musicURL = Bundle.main.url(forResource: "01 A Night Of Dizzy Spells", withExtension: "mp3") {
+                backgroundMusic = SKAudioNode(url: musicURL)
+                addChild(backgroundMusic)
+            }
+        }
+        
        score = SpaceInvadersClass.scoreToPass // loading score from previous lvl
         
         //managing nodes view in scene
@@ -146,13 +154,7 @@ class SpaceInvadersClass: SKScene, SKPhysicsContactDelegate {
         
         initialization()
         self.physicsWorld.contactDelegate = self
-        // BG music
-        if soundStatus.bool(forKey: "SOUNDSTATUS"){
-        if let musicURL = Bundle.main.url(forResource: "01 A Night Of Dizzy Spells", withExtension: "mp3") {
-            backgroundMusic = SKAudioNode(url: musicURL)
-            addChild(backgroundMusic)
-        }
-        }
+        
 
 
         

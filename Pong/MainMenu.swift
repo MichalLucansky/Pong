@@ -107,6 +107,17 @@ class MainMenu: SKScene{
                         
                     }
                     
+                case "Credits" :
+                    if let view = self.view {
+                        if let scene = Credits(fileNamed: "Credits") {
+                            scene.scaleMode = .aspectFill
+                            view.presentScene(scene,transition: SKTransition.moveIn(with: SKTransitionDirection.left, duration: TimeInterval(0.5)))
+                        }
+                        
+                        
+                    }
+
+                    
                     
                     
 

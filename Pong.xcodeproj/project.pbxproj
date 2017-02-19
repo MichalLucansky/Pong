@@ -24,6 +24,8 @@
 		37615B091E2D2671006B7485 /* 03 Chibi Ninja.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 37615B081E2D2671006B7485 /* 03 Chibi Ninja.mp3 */; };
 		37615B0B1E2D29F6006B7485 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 37615B0A1E2D29F6006B7485 /* GameScene.sks */; };
 		37615B0D1E2D2A03006B7485 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37615B0C1E2D2A03006B7485 /* GameScene.swift */; };
+		3768A0FF1E59A7CA00EF5259 /* Credits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3768A0FE1E59A7CA00EF5259 /* Credits.swift */; };
+		3768A1011E59A80700EF5259 /* Credits.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3768A1001E59A80700EF5259 /* Credits.sks */; };
 		37AE57321E03257000C402D6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AE57311E03257000C402D6 /* AppDelegate.swift */; };
 		37AE57341E03257000C402D6 /* PongScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 37AE57331E03257000C402D6 /* PongScene.sks */; };
 		37AE57381E03257000C402D6 /* Pong.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AE57371E03257000C402D6 /* Pong.swift */; };
@@ -68,6 +70,8 @@
 		37615B081E2D2671006B7485 /* 03 Chibi Ninja.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "03 Chibi Ninja.mp3"; sourceTree = "<group>"; };
 		37615B0A1E2D29F6006B7485 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		37615B0C1E2D2A03006B7485 /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		3768A0FE1E59A7CA00EF5259 /* Credits.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Credits.swift; sourceTree = "<group>"; };
+		3768A1001E59A80700EF5259 /* Credits.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Credits.sks; sourceTree = "<group>"; };
 		37AE572E1E03257000C402D6 /* Pong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pong.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37AE57311E03257000C402D6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		37AE57331E03257000C402D6 /* PongScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PongScene.sks; sourceTree = "<group>"; };
@@ -162,6 +166,15 @@
 			name = SpaceInvaders;
 			sourceTree = "<group>";
 		};
+		3768A0FD1E59A7B700EF5259 /* Credits */ = {
+			isa = PBXGroup;
+			children = (
+				3768A0FE1E59A7CA00EF5259 /* Credits.swift */,
+				3768A1001E59A80700EF5259 /* Credits.sks */,
+			);
+			name = Credits;
+			sourceTree = "<group>";
+		};
 		37AE57251E03257000C402D6 = {
 			isa = PBXGroup;
 			children = (
@@ -181,6 +194,7 @@
 		37AE57301E03257000C402D6 /* Pong */ = {
 			isa = PBXGroup;
 			children = (
+				3768A0FD1E59A7B700EF5259 /* Credits */,
 				370804921E3671DC00005321 /* settings */,
 				37B2E23F1E05C8DE008D095A /* Utilities */,
 				37B2E2341E055D06008D095A /* main menu */,
@@ -437,6 +451,7 @@
 				37615B071E2D2584006B7485 /* 01 A Night Of Dizzy Spells.mp3 in Resources */,
 				37CD33BC1E2E76E40093991B /* EndGameLost.sks in Resources */,
 				375285A51E06A3EF004AE801 /* NextLvlScene.sks in Resources */,
+				3768A1011E59A80700EF5259 /* Credits.sks in Resources */,
 				37B2E2331E05381C008D095A /* WinningScene.sks in Resources */,
 				3752859F1E069B70004AE801 /* BlockBreakerGameOver.sks in Resources */,
 				37AE57421E03257000C402D6 /* LaunchScreen.storyboard in Resources */,
@@ -466,6 +481,7 @@
 				375285A31E06A363004AE801 /* NextLvlClass.swift in Sources */,
 				37B2E2411E05C8EC008D095A /* Utilities.swift in Sources */,
 				37AE57321E03257000C402D6 /* AppDelegate.swift in Sources */,
+				3768A0FF1E59A7CA00EF5259 /* Credits.swift in Sources */,
 				370804941E3671F400005321 /* Settings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
