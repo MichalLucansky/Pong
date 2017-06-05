@@ -88,7 +88,7 @@ class GameScene: SKScene {
         xSpeed = CGFloat(40)
         ySpeed = CGFloat(0)
         snakeDirection = .right
-        rotation = CGFloat(M_PI_2)
+        rotation = CGFloat(Double.pi/2)
         offsetX = -40
         offsetY = 0
         blockedMove = .left
@@ -103,7 +103,7 @@ class GameScene: SKScene {
         xSpeed = CGFloat(-40)
         ySpeed = CGFloat(0)
         snakeDirection = .left
-        rotation = CGFloat(M_PI_2) * -1
+        rotation = CGFloat(Double.pi/2) * -1
         offsetX = 40
         offsetY = 0
         blockedMove = .right
@@ -117,7 +117,7 @@ class GameScene: SKScene {
         ySpeed = CGFloat(40)
         xSpeed = CGFloat(0)
         snakeDirection = .up
-        rotation = CGFloat(M_PI)
+        rotation = CGFloat(Double.pi)
         offsetY = -40
         offsetX = 0
         blockedMove = .down
@@ -136,7 +136,7 @@ class GameScene: SKScene {
         
         offsetY = 40
         offsetX = 0
-        rotation = CGFloat(M_PI) * 2
+        rotation = CGFloat(Double.pi) * 2
         blockedMove = .up
         moveArray.append(.down)
         nextPossibleMove.append(.up)
@@ -179,7 +179,7 @@ class GameScene: SKScene {
                     xSpeed = CGFloat(-40)
                     ySpeed = CGFloat(0)
                     snakeDirection = .left
-                    rotation = CGFloat(M_PI_2) * -1
+                    rotation = CGFloat(Double.pi/2) * -1
                     offsetX = 40
                     offsetY = 0
                     blockedMove = .right
@@ -191,7 +191,7 @@ class GameScene: SKScene {
                     xSpeed = CGFloat(40)
                     ySpeed = CGFloat(0)
                     snakeDirection = .right
-                    rotation = CGFloat(M_PI_2)
+                    rotation = CGFloat(Double.pi/2)
                     offsetX = -40
                     offsetY = 0
                     blockedMove = .left
@@ -203,7 +203,7 @@ class GameScene: SKScene {
                     ySpeed = CGFloat(40)
                     xSpeed = CGFloat(0)
                     snakeDirection = .up
-                    rotation = CGFloat(M_PI)
+                    rotation = CGFloat(Double.pi)
                     offsetY = -40
                     offsetX = 0
                     blockedMove = .down
@@ -219,7 +219,7 @@ class GameScene: SKScene {
                     
                     offsetY = 40
                     offsetX = 0
-                    rotation = CGFloat(M_PI) * 2
+                    rotation = CGFloat(Double.pi) * 2
                     blockedMove = .up
                     moveArray.append(.down)
                     nextPossibleMove.append(.up)

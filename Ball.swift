@@ -11,6 +11,9 @@ import SpriteKit
 
 class Ball: SKSpriteNode{
     
+   
+
+    
     func ballMove (ball:SKSpriteNode, speedX: CGFloat, speedY: CGFloat){
         
         
